@@ -8,7 +8,7 @@ chạy câu lệnh: npm install
 
 sau đó chay lệnh npm start thì app sẽ chạy ở port localhost:8000
 
-vào file BackEnd/index.js thay đổi Hello World thành string mới Hello world nodemon
+vào file app/controllers/SiteController.js thay đổi HomePage thành string mới Hompage nodemon
 
 và lưu lại; refresh localhost:8000 và không chạy lại npm start ở terminal
 
