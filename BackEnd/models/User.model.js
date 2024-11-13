@@ -1,22 +1,22 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const mongooseDelete = require('mongoose-delete');
-const User = new Schema({
+import mongoose from 'mongoose';
+import MongooseDelete from 'mongoose-delete';
+
+const UserSchema = new mongoose.Schema({
     firstName: { type: String},
     lastName: { type: String},
     email: { type: String},
     password: { type: String},
     address: { type: String},
     deleted: { type: Boolean, default: true}
-},
-{
+}, {
     timestamp: true,
-}
-);
+});
 
-User.plugin(mongooseDelete, {
+UserSchema.plugin(MongooseDelete, {
     deletedAt : true,
     overrideMethods: 'all',
 });
 
-module.exports = mongoose.model('Course', Course);
+const User = mongoose.model('User', UserSchema)
+
+export default User;

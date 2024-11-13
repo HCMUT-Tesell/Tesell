@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Tesell-Backend Folder",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
@@ -21,7 +22,9 @@
   },
   "homepage": "https://github.com/HCMUT-Tesell/Tesell#readme",
   "dependencies": {
+    "backend": "file:",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "method-override": "^3.0.0",
     "mongoose": "^8.8.1",

@@ -14,3 +14,10 @@ và lưu lại; refresh localhost:8000 và không chạy lại npm start ở ter
 
 nếu có thay đổi nodemon thì đã xong cài đặt tất cả các thư viện liên quan BackEnd
 
+# Connect to Mongo DB
+- Trong folder backend, tạo 1 file mới tên ".env"
+- Thêm vào nội dung sau:
+        MONGO_URI="mongodb+srv://<username>:<password>@cluster0.s2j37.mongodb.net/TesellDB?retryWrites=true&w=majority&appName=Cluster0"
+        PORT=8000
+- Để tìm username và password, đăng nhập vào https://account.mongodb.com/account/login và nhắn Khôi để được add vào database
+
