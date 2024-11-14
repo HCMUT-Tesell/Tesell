@@ -20,4 +20,7 @@ nếu có thay đổi nodemon thì đã xong cài đặt tất cả các thư vi
         MONGO_URI="mongodb+srv://<username>:<password>@cluster0.s2j37.mongodb.net/TesellDB?retryWrites=true&w=majority&appName=Cluster0"
         PORT=8000
 - Để tìm username và password, đăng nhập vào https://account.mongodb.com/account/login và nhắn Khôi để được add vào database
+- Sau khi vào được database, ở thanh sidebar bên phải, vào mục Database Access
+- Chọn "ADD NEW DATABASE USER", ở mục **Password Authentication** nhập tên user và chọn Autogenerate Secure Password, xong nhấn nút Copy, rồi paste mật khẩu ở nơi nào đó; ở mục **Database User Privileges-Built-in Role**, chọn Add built-in Role, xong chọn Read and Write to any database. Sau khi đã hoàn thành, nhấn nút Add User ở dưới.
+- Trong file .env vừa tạo ở trên, thay đổi <username> bằng user name bạn đã nhập ở trên, thay đổi <password> bằng password bạn đã copy
 
