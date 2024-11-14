@@ -2,10 +2,12 @@ import express from 'express'
 import dotevn from 'dotenv'
 import { connectDB } from './config/db.js'
 import userRoute from './routes/user.route.js'
+import cors from 'cors'
 
 dotevn.config();
 
 const app = express()
+app.use(cors());
 const port = process.env.PORT || 8000
 
 app.use(express.json()) // Allow us to accept JSON data in res.body
