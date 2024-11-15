@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div>
-      <Button label={'Click me!'} onClick={handleClick} hasIcon={true} icon={Sign_out()} icon_position={'right'}></Button>
+      <Button label={'Click me!'} onClick={handleClick} icon_left={Sign_out()} icon_right={Sign_out()}></Button>
     </div>
   )
 }
