@@ -1,10 +1,15 @@
 import './App.css'
+import Button from './components/button/button'
 
 function App() {
+  const handleClick = () => {
+    console.log('button was clicked!');
+  };
+
   return (
-    <>
-      <h1 className='text-xl font-bold text-red-500'>Hello Tailwindcss with react vite</h1>
-    </>
+    <div>
+      <Button label={'Click me!'} onClick={handleClick}></Button>
+    </div>
   )
 }
 
