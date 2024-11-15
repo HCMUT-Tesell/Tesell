@@ -26,7 +26,7 @@ revert: hoàn tác cái gì đó
 
 # Git work flow:
 - Clone github repo về máy bằng lệnh `git clone git@github.com:HCMUT-Tesell/Tesell.git`
-- Chọn 1 task trong trang project
+- Chọn 1 task trong trang project, hoặc trong mục issues trong repo. Xem chi tiết task bằng cách nhấn vào tên issue/task, và chọn bằng cách nhấn vào _assign yourself_ ở mục **Assignees** ở bên phải.
 - Tạo branch mới từ branch main, dùng lệnh `git branch <branch name>` (Ví dụ, nếu chọn task [FE] Header Component thì sử dụng lệnh `git branch fe_header_component`)
 - Sau đó, nhảy qua branch vừa tạo bằng lệnh `git checkout <branch name>` (Như ví dụ trên, nhảy qua branch mới bằng lệnh `git checkout fe_header_component`)
 - Tiến hành code trên branch này, sau khi đã test đủ tính năng thì `git add .`, `git commit -m <message>`, `git push`.
