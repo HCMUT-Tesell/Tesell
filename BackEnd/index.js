@@ -1,16 +1,19 @@
-import express from 'express'
+import cors from 'cors'
 import dotevn from 'dotenv'
+import express from 'express'
 import { connectDB } from './config/db.js'
 import userRoute from './routes/user.route.js'
-import cors from 'cors'
+const bodyParser = require('body-parser');
 
 dotevn.config();
 
 const app = express()
-app.use(cors());
 const port = process.env.PORT || 8000
-
+//Middleware
 app.use(express.json()) // Allow us to accept JSON data in res.body
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));  // Xử lý dữ liệu URL encoded
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
