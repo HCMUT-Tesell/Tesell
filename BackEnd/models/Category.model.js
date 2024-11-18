@@ -1,7 +1,3 @@
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
-// const mongooseDelete = require('mongoose-delete');
-
 import mongoose from 'mongoose';
 import mongooseDelete from 'mongoose-delete';
 const Schema = mongoose.Schema;
@@ -26,5 +22,5 @@ Category.plugin(mongooseDelete, {
     overrideMethods: 'all',
 });
 
-// module.exports = mongoose.model('Category', Category);
+
 export default mongoose.model('Category', Category);
