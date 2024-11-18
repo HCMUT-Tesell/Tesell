@@ -1,7 +1,3 @@
-// const express = require('express');
-// const router = express.Router();
-// const productController = require('../controllers/ProductController')
-
 import express from 'express';
 import productController from '../controllers/ProductController.js';
 const router = express.Router();

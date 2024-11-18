@@ -1,8 +1,3 @@
-// const express = require('express');
-// const router = express.Router();
-
-// const userController = require('../controllers/UserController.js')
-
 import express from 'express';
 import userController from '../controllers/UserController.js';
 const router = express.Router();

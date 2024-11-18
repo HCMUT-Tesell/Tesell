@@ -1,7 +1,3 @@
-// const bcrypt = require('bcryptjs');
-// const User = require('../models/User.model');
-// const mongoose = require('mongoose');
-
 import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
 import User from '../models/User.model.js';

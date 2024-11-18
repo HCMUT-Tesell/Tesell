@@ -1,21 +1,93 @@
-// const Product = require('../models/Product.model');
-// const mongoose = require('mongoose');
-
 import mongoose from 'mongoose';
 import Product from '../models/Product.model.js';
 
 class ProductController {
     //[GET] /api/product/getAllProduct
+    // Hàm này sẽ hỗ trợ filter, sort, search
     async getAllProduct (req, res) {
         try {
-            const { page = 1, limit = 10 } = req.query; // Nhận query params cho phân trang
-            const productList = await Product.find()
-                .skip((page - 1) * limit) // Bỏ qua các bản ghi trước đó
-                .limit(Number(limit));   // Lấy giới hạn số bản ghi
-            return res.status(200).json(productList);
+            const { 
+                page = 1, 
+                limit = 10, 
+                sort, 
+                search, 
+                brand, 
+                category, 
+                minPrice, 
+                maxPrice, 
+                rating 
+            } = req.query;
+            
+            // console.log(page)
+            // console.log(limit)
+            // console.log(sort)
+            // console.log(search)
+            // console.log(brand)
+            // console.log(category)
+            // console.log(minPrice)
+            // console.log(maxPrice)
+            // console.log(rating)
+
+            // Create query
+            const query = {};
+    
+            // Search 
+            if (search) {
+                query.productName = { $regex: search, $options: 'i' }; 
+            }
+    
+            // Filter brand
+            if (brand) {
+                query.brand = brand;
+            }
+    
+            // Filter category
+            if (category) {
+                query.category = category;
+            }
+    
+            // Filter
+            if (minPrice || maxPrice) {
+                query.sellPrice = {};
+                if (minPrice) query.sellPrice.$gte = Number(minPrice); 
+                if (maxPrice) query.sellPrice.$lte = Number(maxPrice); 
+            }
+    
+            // Filter rating
+            if (rating) {
+                query.rating = { $gte: Number(rating) }; 
+            }
+    
+            // sort
+            let sortOption = {};
+            if (sort) {
+                const sortFields = {
+                    'price_asc': { sellPrice: 1 },  
+                    'price_desc': { sellPrice: -1 }, 
+                    'rating': { rating: -1 },       
+                    'newest': { createdAt: -1 },    
+                };
+                sortOption = sortFields[sort] || {}; 
+            }
+    
+            // Pagination
+            const productList = await Product.find(query)
+                .sort(sortOption) 
+                .skip((page - 1) * limit) 
+                .limit(Number(limit));   
+    
+            const totalProducts = await Product.countDocuments(query);
+    
+            
+            return res.status(200).json({
+                total: totalProducts,     
+                page: Number(page),       
+                limit: Number(limit),     
+                products: productList     
+            });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Đã có lỗi xảy ra khi getAllProduct!' });
+            res.status(500).json({ message: 'Đã có lỗi xảy ra khi lấy getAllProduct!' });
         }
     }
     //[POST] /api/product/create
@@ -132,7 +204,7 @@ class ProductController {
                 isFeature,
                 brand
             }
-            console.log("toi duoc truoc hanh dong update")
+            // console.log("toi duoc truoc hanh dong update")
             const product = await Product.findByIdAndUpdate(
                 productId,
                 newProduct,
