@@ -42,6 +42,18 @@ const User = new Schema({
         type: String,
         match: [/^\d{10,15}$/, 'Số điện thoại không hợp lệ'],
     },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
+    isRepairman: {
+        type: Boolean,
+        default: false,
+    },
+    isCustomer: {
+        type: Boolean,
+        default: true,
+    },
     deleted: { 
         type: Boolean, 
         default: true
