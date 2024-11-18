@@ -1,12 +1,14 @@
-import cors from 'cors'
-import dotevn from 'dotenv'
-import express from 'express'
-import { connectDB } from './config/db.js'
-import userRoute from './routes/user.route.js'
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
+import { connectDB } from './config/db.js';
 
-dotevn.config();
 
+import initRouter from './routes/index.js';
+
+
+dotenv.config();
 const app = express()
 const port = process.env.PORT || 8000
 //Middleware
@@ -15,12 +17,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));  // Xử lý dữ liệu URL encoded
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-  // res.send('Hello World! test nodemon')
-})
 
-app.use("/api/users", userRoute)
+// init Router
+initRouter(app);
 
 app.listen(port, () => {
   connectDB();

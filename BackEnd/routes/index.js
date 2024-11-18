@@ -1,9 +1,14 @@
-const siteRouter = require('./site')
+import productRouter from './product.route.js';
+// import siteRouter from './site'
+import userRouter from './user.route.js';
 
 
-function router(app) {
-    app.use('/', siteRouter)
+function initRouter(app) {
+    app.use('/api/user', userRouter)
+    app.use('/api/product', productRouter)
+    // app.use('/api/order', orderRouter)
+    // app.use('/', siteRouter)
 }
 
-module.exports = router;
+export default initRouter;
 

@@ -1,22 +1,62 @@
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
+// const mongooseDelete = require('mongoose-delete');
+
 import mongoose from 'mongoose';
-import MongooseDelete from 'mongoose-delete';
+import mongooseDelete from 'mongoose-delete';
+const Schema = mongoose.Schema;
 
-const UserSchema = new mongoose.Schema({
-    firstName: { type: String},
-    lastName: { type: String},
-    email: { type: String},
-    password: { type: String},
+const User = new Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        match: [/\S+@\S+\.\S+/, 'Email không hợp lệ']
+    },
+    password: { 
+        type: String,
+        required: true, 
+    },
+    firstName: {
+        type: String, 
+        // required: true,
+    },
+    lastName: {
+        type: String,
+        // required: true,
+    },
+    sex: {
+        type: String,
+        // required: true,
+    },
     address: { type: String},
-    deleted: { type: Boolean, default: true}
-}, {
+    cccd: { 
+        type: String,
+        match: [/^\d{12}$/, 'Số CCCD không hợp lệ'],
+    },
+    birthDay: { 
+        type: Date,
+        // required: true,
+    },
+    phone: { 
+        type: String,
+        match: [/^\d{10,15}$/, 'Số điện thoại không hợp lệ'],
+    },
+    deleted: { 
+        type: Boolean, 
+        default: true
+    }
+},
+{
     timestamp: true,
-});
-
-UserSchema.plugin(MongooseDelete, {
+}
+);
+User.plugin(mongooseDelete, {
     deletedAt : true,
     overrideMethods: 'all',
 });
 
-const User = mongoose.model('User', UserSchema)
+// module.exports = mongoose.model('User', User);
+export default mongoose.model('User', User);
 
-export default User;
+
