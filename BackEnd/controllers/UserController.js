@@ -30,12 +30,12 @@ class UserController {
                 email,
                 password: hashedPassword,
                 firstName,
-            lastName,
-            sex,
-            address,
-            cccd,
-            birthDay,
-            phone
+                lastName,
+                sex,
+                address,
+                cccd,
+                birthDay,
+                phone
             });
     
             await newUser.save();
