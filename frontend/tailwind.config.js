@@ -7,6 +7,12 @@ export default {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
+    fontFamily: {
+      'body': "'Montserrat'",
+    },
+    boxShadow: {
+      'cart': '0px 0px 10px rgba(0, 0, 0, 0.25)'
+    },
     extend: {},
   },
   plugins: []
