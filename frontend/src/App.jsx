@@ -4,6 +4,7 @@ import Sign_out from './assets/Sign_out_icon/Sign_out_svg'
 import Catalog from './components/Catalog';
 import CartItem from './components/CartItem';
 import Cart from './components/Cart'
+import InputField from './components/InputField';
 
 function App() {
   const handleClick = () => {
@@ -12,9 +13,12 @@ function App() {
 
   return (
     <div>
+      <InputField state=''/>
+      <InputField state='disabled'/>
+      <InputField state='required'/>
       {/* <Catalog/> */}
       {/* <CartItem/> */}
-      <Cart/>
+      {/* <Cart/> */}
       {/* <Button label={'Click me!'} onClick={handleClick} icon_left={Sign_out()} icon_right={Sign_out()}></Button> */}
     </div>
   )
