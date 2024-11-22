@@ -44,7 +44,7 @@ const ProductList = () => {
   };
 
   return (
-    <div className="flex flex-wrap gap-4 p-8">
+    <div className="flex flex-wrap p-8 justify-between">
       {products.map((product) => (
         <ProductCard
           key={product.id}

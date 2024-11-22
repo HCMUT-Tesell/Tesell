@@ -6,15 +6,15 @@ const Criteria = () => {
         <div className="w-[1076x] h-[85px] border border-gray-300 rounded-lg bg-blue-50 p-4 flex justify-around items-center">
             <div className="flex items-center space-x-2">
                 <FlashOnIcon/>
-                <span>Giao hàng nhanh</span> 
+                <span className='font-semibold text-xl text-[#0B4B77]'>Giao hàng nhanh</span> 
             </div> 
             <div className="flex items-center space-x-2"> 
                  <GroupsIcon/>
-                <span>Tư vấn chuyên nghiệp</span> 
+                <span className='font-semibold text-xl text-[#0B4B77]'>Tư vấn chuyên nghiệp</span> 
             </div> 
             <div className="flex items-center space-x-2"> 
                 <CheckCircleOutlineIcon/>
-                <span>Sản phẩm chất lượng</span>
+                <span className='font-semibold text-xl text-[#0B4B77]'>Sản phẩm chất lượng</span>
             </div>
         </div>
     );  
