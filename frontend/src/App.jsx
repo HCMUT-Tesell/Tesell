@@ -12,6 +12,8 @@ function App() {
   };
 
   return (
+    <>
+
     <div>
       <InputField state=''/>
       <InputField state='disabled'/>
@@ -21,6 +23,7 @@ function App() {
       {/* <Cart/> */}
       {/* <Button label={'Click me!'} onClick={handleClick} icon_left={Sign_out()} icon_right={Sign_out()}></Button> */}
     </div>
+    </>
   )
 }
 
