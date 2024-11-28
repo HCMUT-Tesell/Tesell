@@ -1,37 +1,20 @@
 import './App.css'
-import Navbar from "./components/Navbar/Navbar"
-import Banner from "./components/Banner/banner"
-import Catalog from "./components/Catalog"
-import Criteria from './components/Criteria'
-import ProductList from './components/Item/ProductList'
+import { Route, Routes } from 'react-router-dom'
+import Navbar from './components/Navbar/Navbar'
+import LandingPage from './pages/LandingPage/LandingPage'
+import ProductDetail from './pages/ProductDetail/ProductDetail'
+import OrderDetail from './pages/OrderDetail/OrderDetail'
 
 const App = () => {
   return (
-    <div className='flex flex-col'>
-      <div className='flex flex-col gap-2'>
-        <Navbar/>
-        <Banner/>
-      </div>
-      <div className='p-8 flex flex-row gap-4'>
-        <div className='w-fit'> 
-          <Catalog/>
-        </div>
-        <div className='flex flex-col w-full gap-4'>
-          <div className='w-full h-20 bg-blue-700 rounded-lg'>
-            <Criteria/>
-          </div>
-          <div className='w-full h-full'>
-            <ProductList/>
-            <ProductList/>
-            <ProductList/>
-            <ProductList/>
-            <ProductList/>
-          </div>
-        </div>
-      </div>
-      
+    <div>
+      <Navbar/>
+      <Routes>
+        <Route path='/' element={<LandingPage/>}/>
+        <Route path='/ProductDetail' element={<ProductDetail/>}/>
+        <Route path='/OrderDetail' element={<OrderDetail/>}/>
+      </Routes>
     </div>
-
   )
 }
 
