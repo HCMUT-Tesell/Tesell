@@ -1,19 +1,19 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import plus_icon from '../assets/icons/plus.png'
 import subtract_icon from '../assets/icons/subtract.png'
 const formatCurrency = (number) => {
   return number.toLocaleString().replaceAll(",", ".");
 }
 const CartItem = (product) => {
-    // const [amountProduct, setAmountProduct] = useState(1);
-    // const incrAmount = () => {
-    //     setAmountProduct(amountProduct + 1);
-    // }
-    // const decrAmount = () => {
-    //     if (amountProduct > 1) {
-    //         setAmountProduct(amountProduct - 1);
-    //     }
-    // }
+    const [amountProduct, setAmountProduct] = useState(1);
+    const incrAmount = () => {
+        setAmountProduct(amountProduct + 1);
+    }
+    const decrAmount = () => {
+        if (amountProduct > 0) {
+            setAmountProduct(amountProduct - 1);
+        }
+    }
     
       
   return (
@@ -30,11 +30,11 @@ const CartItem = (product) => {
           <div className='flex md:w-[124px] md:h-8'>
             <div className='bg-none md:bg-[#93C8ED] flex h-3 rounded-xl items-center justify-center md:h-[40px] gap-2 md:rounded-3xl  md:items-center md:gap-[8px]'>
               <div className='size-4 md:size-6 md:items-center'>
-                <img src={subtract_icon} className='cursor-pointer size-3 mx-0.5 my-0.5 md:size-4 md:mx-1 md:my-1' alt="" />
+                <img src={subtract_icon} className='cursor-pointer size-3 mx-0.5 my-0.5 md:size-4 md:mx-1 md:my-1' alt="" onClick={decrAmount}/>
               </div>
-              <span className='py-1 w-4 text-[8px] md:p-0 md:text-[18px] md:w-[56px] text-black'>1</span>
+              <span className='py-1 w-4 text-[8px] md:p-0 md:text-[18px] md:w-[56px] text-black'>{amountProduct}</span>
               <div className='size-4 md:size-6'>
-                <img src={plus_icon} className='cursor-pointer size-3 mx-0.5 my-0.5 md:size-4 md:mx-1 md:my-1' alt="" />
+                <img src={plus_icon} className='cursor-pointer size-3 mx-0.5 my-0.5 md:size-4 md:mx-1 md:my-1' alt="" onClick={incrAmount} />
               </div>
             </div>
           </div>

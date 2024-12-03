@@ -17,7 +17,7 @@
     gap: 30px;
     align-items:end;
     background-color: white;
-    padding: 8px;
+    padding: 9px;
     gap: 100px;
     justify-content: space-between;
     border-radius: 20px;
@@ -63,3 +63,30 @@
 
 }
 
+.cart-popup {
+    position: absolute;
+    top: 90px; /* Adjust as needed */
+    right: 40px; /* Adjust as needed */
+    background-color: #DCEDF9;
+    border: 2px solid #093D61;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    box-shadow: #0C5282;
+    border-radius: 20px;
+  }
+.cart-button{
+    cursor: pointer;
+}
+.noti-popup{
+    position: absolute;
+    top: 90px; /* Adjust as needed */
+    right: 230px; /* Adjust as needed */
+    background-color: #DCEDF9;
+    border: 2px solid #093D61;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    box-shadow: #0C5282;
+    border-radius: 20px;
+}

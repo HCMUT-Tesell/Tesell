@@ -8,7 +8,7 @@ import image_product_7 from "./images/7.jpg";
 
 const products = [
   {
-    productName: "Samssssssssung S24aaassssssssung S24aaaaaaaaaa Ultraaaaaaaaaaaaaaassssssssung S24aaaaaaaaaa Ultraaaaaaaaaaaaaaassssssssung S24aaaaaaaaaa Ultraaaaaaaaaaaaaaassssssssung S24aaaaaaaaaa Ultraaaaaaaaaaaaaaaaaaaaaa Ultraaaaaaaaaaaaaaaaaaaa",
+    productName: "Samsung S24 Ultra 5G",
     description: "asbdiusabui",
     image: image_product_1,
     imageUrl: "",
@@ -278,7 +278,7 @@ const products = [
     brand: "khaaaa",
   },
   {
-    productName: "iPhoneaaaa 16 Pro",
+    productName: "iPhone 16 Pro",
     description: "asbdiusabui",
     image: image_product_7,
     imageUrl: "",
@@ -293,7 +293,7 @@ const products = [
     brand: "khaaaa",
   },
   {
-    productName: "iPhoneaaaa 16 Pro",
+    productName: "iPhone 16 Pro",
     description: "asbdiusabui",
     image: image_product_7,
     imageUrl: "",
@@ -308,7 +308,7 @@ const products = [
     brand: "khaaaa",
   },
   {
-    productName: "iPhoneaaaa 16 Pro",
+    productName: "iPhone 16 Pro",
     description: "asbdiusabui",
     image: image_product_7,
     imageUrl: "",
@@ -323,7 +323,7 @@ const products = [
     brand: "khaaaa",
   },
   {
-    productName: "iPhoneaaaa 16 Pro",
+    productName: "iPhone 16 Pro",
     description: "asbdiusabui",
     image: image_product_7,
     imageUrl: "",
@@ -338,7 +338,7 @@ const products = [
     brand: "khaaaa",
   },
   {
-    productName: "iPhoneaaaa 16 Pro",
+    productName: "iPhone 16 Pro",
     description: "asbdiusabui",
     image: image_product_7,
     imageUrl: "",
@@ -353,7 +353,7 @@ const products = [
     brand: "khaaaa",
   },
   {
-    productName: "iPhoneaaaa 16 Pro",
+    productName: "iPhone 16 Pro",
     description: "asbdiusabui",
     image: image_product_7,
     imageUrl: "",
@@ -368,7 +368,7 @@ const products = [
     brand: "khaaaa",
   },
   {
-    productName: "iPhoneaaaa 16 Pro",
+    productName: "iPhone 16 Pro",
     description: "asbdiusabui",
     image: image_product_7,
     imageUrl: "",
@@ -383,7 +383,7 @@ const products = [
     brand: "khaaaa",
   },
   {
-    productName: "iPhoneaaaa 16 Pro",
+    productName: "iPhone 16 Pro",
     description: "asbdiusabui",
     image: image_product_7,
     imageUrl: "",
@@ -398,7 +398,7 @@ const products = [
     brand: "khaaaa",
   },
   {
-    productName: "iPhoneaaaa 16 Pro",
+    productName: "iPhone 16 Pro",
     description: "asbdiusabui",
     image: image_product_7,
     imageUrl: "",
