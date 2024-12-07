@@ -18,10 +18,6 @@ const LandingPage = () => {
           </div>
           <div className='w-full h-full'>
             <ProductList/>
-            <ProductList/>
-            <ProductList/>
-            <ProductList/>
-            <ProductList/>
           </div>
         </div>
       </div>

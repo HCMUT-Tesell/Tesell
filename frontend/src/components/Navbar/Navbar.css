@@ -20,7 +20,7 @@
     padding: 9px;
     gap: 100px;
     justify-content: space-between;
-    border-radius: 20px;
+    border-radius: 40px;
 }
 .button-danh-muc{
     background-color: #93C8ED;
@@ -89,4 +89,9 @@
     z-index: 1000;
     box-shadow: #0C5282;
     border-radius: 20px;
+}
+.sb-text{
+    font-size: 20px;
+    font-weight: light;
+    color: #0c53825e;
 }

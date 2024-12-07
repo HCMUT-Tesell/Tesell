@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
 import './Navbar.css'
-import Button from '../button/button'
 import logo_circle from '../../assets/logo_white.png'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
@@ -9,6 +8,8 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
 import KeyboardDoubleArrowRightRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowRightRounded';
+
+
 import Cart from '../Cart'
 
 const Navbar = () => {
@@ -39,8 +40,6 @@ const Navbar = () => {
           <PhoneAndroidOutlinedIcon/>
           Hotline: +84 123 465 232
         </div>
-
-
         <div className='noti-icon' onClick={toggleNoti}><NotificationsNoneOutlinedIcon sx={{ color:'white' }} /></div>
         {isNotiVisible && (
         <div className='noti-popup'>
