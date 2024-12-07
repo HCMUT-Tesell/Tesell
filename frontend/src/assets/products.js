@@ -12,7 +12,7 @@ const products = [
     description: "asbdiusabui",
     image: image_product_1,
     imageUrl: "",
-    buyPrice: 24000000,
+    buyPrice: 25000000,
     sellPrice: 24000000,
     category: "phone",
     stockProductCount: 10,
