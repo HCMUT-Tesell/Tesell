@@ -1,19 +1,25 @@
 import CartItem from './CartItem'
-import products from '../assets/products'
+// import products from '../assets/products'
 import arrow_right from '../assets/icons/arrow_right.png'
 import { formatCurrency } from './CartItem'
+import  React, { useContext } from 'react'
+import { StoreContext } from './context/StoreContext'
+
+
 const Cart = () => {
   let totalPrice = 0
-  products.map((product) => {
-    totalPrice += product.sellPrice;
-  })
+  const {cartItems, products, removeFromCart} = useContext(StoreContext);
   return (
     <div className='bg-[#E8F3FB]  md:w-[325px] md:rounded-[10px] overflow-hidden md:gap-[18px] shadow-cart'>
         <div className='md:pl-5 md:pt-5'>
             {products.map((product, index) => {
+              if (cartItems[product._id]>0){
+                totalPrice += product.sellPrice*cartItems[product._id];
                 return (
-                        <CartItem key={index} productName={product.productName} sellPrice={product.sellPrice} image={product.image} />
+                        <CartItem key={index} _id={product._id} productName={product.productName} sellPrice={product.sellPrice} image={product.image} />
+
                 )
+              }
                 
             })}
         </div>
