@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
 import './Navbar.css'
 import logo_circle from '../../assets/logo_white.png'
@@ -8,14 +8,14 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
 import KeyboardDoubleArrowRightRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowRightRounded';
-
-
 import Cart from '../Cart'
 import Login from '../Login/Login';
+import { StoreContext } from '../context/StoreContext';
 
 const Navbar = ({setShowLogin}) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isNotiVisible, setIsNotiVisible] = useState(false);
+  const {token, setToken} = useContext(StoreContext);
 
   const togglePopup = () => {
     setIsPopupVisible(!isPopupVisible);
@@ -57,10 +57,15 @@ const Navbar = ({setShowLogin}) => {
           <Cart/>
         </div>
       )}
-
-        <div onClick={()=>setShowLogin(true)} className="button-signin" >
-         <h > Sign in<KeyboardDoubleArrowRightRoundedIcon/></h>
-        </div> 
+        {!token?
+            <div onClick={()=>setShowLogin(true)} className="button-signin" >
+               <h > Sign in</h>
+            </div> :
+            <div onClick={()=>setShowLogin(true)} className="profile" >
+              Loged In
+            </div>
+        }
+        
        </div>
   )
 }

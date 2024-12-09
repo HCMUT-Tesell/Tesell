@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './Login.css'
 import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
@@ -33,15 +33,16 @@ const Login = ({setShowLogin}) => {
         event.preventDefault();
         let newUrl=url;
         if (currState==="Login"){
-            newUrl+="/api/user/login";
+            newUrl+="/api/user/login"
         } else{
-            newUrl+="/api/user/signUp";
+            newUrl+="/api/user/signUp"
         }
-        const response = await axios.post(newUrl, data);
+        const response = await axios.post(newUrl, data)
+
         if (response.data.success) {
-            setToken(response.data.token);
-            localStorage.setItem("token", response.data.token);
-            setShowLogin(false);
+            setToken(response.data.token)
+            localStorage.setItem("token", response.data.token)
+            setShowLogin(false)
         }else{
             alert(response.data.message)
         }
