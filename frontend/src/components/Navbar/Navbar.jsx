@@ -11,16 +11,19 @@ import KeyboardDoubleArrowRightRoundedIcon from '@mui/icons-material/KeyboardDou
 
 
 import Cart from '../Cart'
+import Login from '../Login/Login';
 
-const Navbar = () => {
+const Navbar = ({setShowLogin}) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isNotiVisible, setIsNotiVisible] = useState(false);
+
   const togglePopup = () => {
     setIsPopupVisible(!isPopupVisible);
   };
   const toggleNoti = () => {
     setIsNotiVisible(!isNotiVisible);
   }
+
   return (
     <div className='Navbar'>
         <img src={logo_circle} alt="" className="logo" />
@@ -55,9 +58,9 @@ const Navbar = () => {
         </div>
       )}
 
-        <div className="button-signin">
-         <b> Sign in<KeyboardDoubleArrowRightRoundedIcon/></b>
-        </div>  
+        <div onClick={()=>setShowLogin(true)} className="button-signin" >
+         <h > Sign in<KeyboardDoubleArrowRightRoundedIcon/></h>
+        </div> 
        </div>
   )
 }

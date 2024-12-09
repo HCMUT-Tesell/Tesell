@@ -1,5 +1,4 @@
 
-
 .Navbar{
     display: flex;
     padding: 10px 10px;
@@ -14,11 +13,11 @@
 }
 .search-bar-container{
     display: flex;
-    gap: 30px;
-    align-items:end;
-    background-color: white;
+    align-items:center;
+    background-color: rgb(255, 255, 255);
     padding: 9px;
     gap: 100px;
+    box-sizing: border-box;
     justify-content: space-between;
     border-radius: 40px;
 }
@@ -63,7 +62,7 @@
 
 }
 
-.cart-popup {
+.cart-popup, .Log-popup {
     position: absolute;
     top: 90px; /* Adjust as needed */
     right: 40px; /* Adjust as needed */

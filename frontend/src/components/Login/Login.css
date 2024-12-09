@@ -1,0 +1,100 @@
+.Login-popup{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 120%;
+    background-color: rgba(255, 255, 255, 0.47);
+    backdrop-filter: blur(5px);
+    display: grid;
+
+}
+.login-popup-container{
+    place-self: center;
+    display: flex;
+    width: max(30vw, 440px);
+    height:fit-content;
+    color: #000000;
+    background-color: #EEF5FF;
+    box-shadow: 4px 4px 10px 0 rgba(130, 145, 153, 0.8);
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px 30px;
+    border-radius: 20px; 
+}
+.login-popup-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.state{
+    display: flex;
+    font-size: max(1vw, 30px);
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+.login-popup-title img{
+    height: 50px;
+}
+.logo{
+    justify-content: center;
+    align-items: center;
+}
+.login-popup-input{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.sign-up-input{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.sign-up-input-name, .sex-birth, .phone-cccd{
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    padding: 1px;
+    align-items: center;
+}
+.sign-up-input-name input, .sex-birth input, .phone-cccd input{
+    width: 50%;
+}
+
+.login-popup-input input{
+    border-radius: 15px;
+    background-color: #93C8ED;
+    padding: 10px;
+}
+.login-popup-input input::placeholder{
+    color: white;
+   font-style: italic;
+}
+.use-term{
+    display: flex;
+    gap: 10px;
+}
+.log-button{
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    color: black;
+    background-color: #93C8ED;
+    cursor: pointer;
+    margin: 0px 50px  0px 50px;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+.ask{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.ask span{
+    color: #127CC5;
+    font-weight: bold;
+}
