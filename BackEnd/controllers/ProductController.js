@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
+import Category from '../models/Category.model.js';
 import Product from '../models/Product.model.js';
-
 class ProductController {
     //[GET] /api/product/getAllProduct
     // Hàm này sẽ hỗ trợ filter, sort, search
@@ -12,7 +12,7 @@ class ProductController {
                 sort, 
                 search, 
                 brand, 
-                category, 
+                category, // category name
                 minPrice, 
                 maxPrice, 
                 rating 
@@ -23,7 +23,7 @@ class ProductController {
             // console.log(sort)
             // console.log(search)
             // console.log(brand)
-            // console.log(category)
+            console.log(category)
             // console.log(minPrice)
             // console.log(maxPrice)
             // console.log(rating)
@@ -40,12 +40,30 @@ class ProductController {
             if (brand) {
                 query.brand = brand;
             }
-    
-            // Filter category
+            // Filter Category
             if (category) {
-                query.category = category;
+                // get categoryId by category name before filter
+                let categoryId;
+                try {
+                    categoryId = await Category.findOne({ categoryName: category });
+                    console.log(categoryId)
+                    if (!categoryId) {
+                        return res.status(404).json({ message: 'CategoryId not found by Name' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: `Error in finding category ID by category name: ${error.message}` });
+                }
+                // Filter category by category(name)
+                if (categoryId) {
+                    query.category = categoryId;
+                }
+
+                // if (categoryId) {
+                //     query.category = categoryId;
+                // }
             }
-    
+            
+
             // Filter
             if (minPrice || maxPrice) {
                 query.sellPrice = {};

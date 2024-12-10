@@ -69,6 +69,15 @@ class CategoryController {
             console.log('Loi xay ra o createCategory')
         }
     }
+    //[GET] /api/category/getIdCategoryByName
+    async getIdCategoryByName(categoryName) {
+        try {
+            const category = await Category.findOne({ categoryName });
+            return category ? category._id : null;
+        } catch (error) {
+            throw new Error('Error finding category by name: ' + error.message);
+        }
+    }
     //[GET] /api/category/:categoryId
     async getCategoryByID (req, res) {
         const categoryId = req.params.categoryId
