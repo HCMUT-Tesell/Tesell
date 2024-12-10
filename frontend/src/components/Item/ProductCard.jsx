@@ -20,7 +20,7 @@ const ProductCard = ({id, productName, description, image,
   const {cartItems, addToCart, removeFromCart} = useContext(StoreContext);
 
   return (
-    <div className="w-[236px] h-[385px] border border-gray-300 rounded-lg p-4 flex flex-col items-center m-3">
+    <div className="w-[236px] h-[385px] border border-gray-300 rounded-lg p-4 flex flex-col items-center m-1">
       {/* Hình ảnh sản phẩm */}
       <img src={image} alt={productName} className="w-[200px] h-[200px] object-cover rounded-md"/>
 

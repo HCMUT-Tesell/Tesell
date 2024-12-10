@@ -7,15 +7,18 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
-import KeyboardDoubleArrowRightRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowRightRounded';
+import ToggleOnRoundedIcon from '@mui/icons-material/ToggleOnRounded';
 import Cart from '../Cart'
+import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
 import Login from '../Login/Login';
 import { StoreContext } from '../context/StoreContext';
+import axios from 'axios';
 
 const Navbar = ({setShowLogin}) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isNotiVisible, setIsNotiVisible] = useState(false);
   const {token, setToken} = useContext(StoreContext);
+  const url="http://localhost:8000";
 
   const togglePopup = () => {
     setIsPopupVisible(!isPopupVisible);
@@ -23,6 +26,22 @@ const Navbar = ({setShowLogin}) => {
   const toggleNoti = () => {
     setIsNotiVisible(!isNotiVisible);
   }
+
+
+
+// HUHU Nó sai ở đâu á, chổ này là tui có ID để đi tìm rồi nè: localStorage.getItem("ID"), mà tìm nàm shaooooo?
+  const getUserPro5ById = async () => {
+    try {
+        const response = await axios.get(`${url}/api/user/${localStorage.getItem("ID")}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}` // Thêm token vào header
+            }
+        });
+        return response.data.firstName;
+    } catch (error) {
+        console.error("Error fetching user profile:", error.message);
+    }
+};
 
   return (
     <div className='Navbar'>
@@ -34,8 +53,7 @@ const Navbar = ({setShowLogin}) => {
         </div>
         
 <div className="search-bar-container">
-    <div className="sb-text"> Tìm kiếm sản phẩm </div>
-    <input type="text" placeholder="Search..." className="search-input" />
+    <input type="text" placeholder="Tìm kiếm..." className="search-input" />
     <SearchOutlinedIcon/>
 </div>
 
@@ -62,7 +80,16 @@ const Navbar = ({setShowLogin}) => {
                <h > Sign in</h>
             </div> :
             <div onClick={()=>setShowLogin(true)} className="profile" >
-              Loged In
+              <div className="loged-indicator">
+                <ToggleOnRoundedIcon/></div> 
+                Đã đăng nhập
+              <ul className="pro5-dropdown">
+                <li>Đặng Tuấn</li> 
+                {/* Tên người dùng sẽ hiển thị ở đây*/}
+                <hr />
+                <ArrowOutwardRoundedIcon/>
+                <li>Đăng xuất</li>
+              </ul>
             </div>
         }
         
