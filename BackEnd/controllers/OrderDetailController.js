@@ -3,10 +3,6 @@ import OrderDetail from "../models/OrderDetail.model.js";
 
 
 class OrderDetailController {
-    // [GET] /api/orderDetail/getAllCategory
-    async getAllOrderDetail (req, res) {
-        return res.json('Needed to implement')
-    }
     // [POST] /api/orderDetail/create
     async createOrderDetail(req, res) {
         try {

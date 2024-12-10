@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import Category from '../models/Category.model.js';
 import Product from '../models/Product.model.js';
 
-
 class CategoryController {
     // [GET] /api/category/getAllCategory
     async getAllCategory (req, res) {

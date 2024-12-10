@@ -1,7 +1,3 @@
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
-// const mongooseDelete = require('mongoose-delete');
-
 import mongoose from 'mongoose';
 import mongooseDelete from 'mongoose-delete';
 const Schema = mongoose.Schema;
@@ -11,11 +7,6 @@ const Order = new Schema ({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    product: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-        required: true
-    }],
     orderDetail: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'OrderDetail',

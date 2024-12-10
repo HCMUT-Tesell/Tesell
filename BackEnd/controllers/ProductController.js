@@ -23,7 +23,7 @@ class ProductController {
             // console.log(sort)
             // console.log(search)
             // console.log(brand)
-            console.log(category)
+            // console.log(category)
             // console.log(minPrice)
             // console.log(maxPrice)
             // console.log(rating)
@@ -40,13 +40,14 @@ class ProductController {
             if (brand) {
                 query.brand = brand;
             }
+
             // Filter Category
             if (category) {
                 // get categoryId by category name before filter
                 let categoryId;
                 try {
                     categoryId = await Category.findOne({ categoryName: category });
-                    console.log(categoryId)
+                    // console.log(categoryId)
                     if (!categoryId) {
                         return res.status(404).json({ message: 'CategoryId not found by Name' });
                     }
@@ -57,13 +58,8 @@ class ProductController {
                 if (categoryId) {
                     query.category = categoryId;
                 }
-
-                // if (categoryId) {
-                //     query.category = categoryId;
-                // }
             }
-            
-
+        
             // Filter
             if (minPrice || maxPrice) {
                 query.sellPrice = {};
@@ -96,7 +92,6 @@ class ProductController {
     
             const totalProducts = await Product.countDocuments(query);
     
-            
             return res.status(200).json({
                 total: totalProducts,     
                 page: Number(page),       

@@ -1,7 +1,3 @@
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
-// const mongooseDelete = require('mongoose-delete');
-
 import mongoose from 'mongoose';
 import mongooseDelete from 'mongoose-delete';
 const Schema = mongoose.Schema;
