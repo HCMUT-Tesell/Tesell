@@ -3,6 +3,59 @@ import OrderDetail from "../models/OrderDetail.model.js";
 
 
 class OrderDetailController {
+    // [GET] /api/orderDetail/getAllOrderDetail
+    async getAllOrderDetail(req, res) {
+        try {
+            // Lấy các tham số từ query params
+            const { 
+                page = 1, 
+                limit = 10, 
+                sort, 
+                quantityMin, 
+                quantityMax
+            } = req.query;
+
+            // Tạo query tìm kiếm
+            const query = {};
+
+            // Lọc theo số lượng (quantity)
+            if (quantityMin || quantityMax) {
+                query.quantity = {};
+                if (quantityMin) query.quantity.$gte = Number(quantityMin);
+                if (quantityMax) query.quantity.$lte = Number(quantityMax);
+            }
+
+            // Sắp xếp (sort)
+            let sortOption = {};
+            if (sort) {
+                const sortFields = {
+                    'quantity_asc': { quantity: 1 },  
+                    'quantity_desc': { quantity: -1 },
+                };
+                sortOption = sortFields[sort] || {};  // Nếu không có kiểu sort, thì không sắp xếp.
+            }
+
+            // Truy vấn dữ liệu từ OrderDetail
+            const orderDetails = await OrderDetail.find(query)
+                .sort(sortOption) // Sắp xếp
+                .skip((page - 1) * limit) // Phân trang
+                .limit(Number(limit)) // Giới hạn số lượng kết quả
+
+            // Tính tổng số lượng kết quả
+            const totalOrderDetails = await OrderDetail.countDocuments(query);
+
+            // Trả về kết quả
+            return res.status(200).json({
+                total: totalOrderDetails,  // Tổng số lượng order details
+                page: Number(page),        // Trang hiện tại
+                limit: Number(limit),      // Số lượng mỗi trang
+                orderDetails               // Dữ liệu order details
+            });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Đã có lỗi xảy ra khi lấy thông tin OrderDetails!' });
+        }
+    }
     // [POST] /api/orderDetail/create
     async createOrderDetail(req, res) {
         try {
