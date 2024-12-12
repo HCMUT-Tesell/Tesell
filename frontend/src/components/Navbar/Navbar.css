@@ -103,24 +103,28 @@
     color: white;
     align-items: center;
     justify-content: center;
+
 }
 .pro5-dropdown{
+    cursor: pointer;
     position:absolute;
     display:none;
     right: 0;
     z-index:1;
+
 }
 .profile:hover .pro5-dropdown{
     display: flex;
     flex-direction: column;
     color: black;
     gap:10px;
-    background-color: #EEF5FF;
+    background-color: #ffffff;
     padding: 12px 25px;
-    border-radius: 5px;
+    border: #48b3ff solid 2px;
+    border-radius: 15px;
+    width: max(200px, 15vw);
 
 }
-
 
 
 @media screen and (max-width: 999px){
@@ -135,6 +139,9 @@
         display: none;
     }
     .noti-icon, .noti-popup{
+        display: none;
+    }
+    .loged-indicator p{
         display: none;
     }
 }

@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { useState } from 'react'
+import React, { useContext, useState, useEffect } from "react";
 import './Navbar.css'
 import logo_circle from '../../assets/logo_white.png'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
@@ -13,35 +12,56 @@ import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
 import Login from '../Login/Login';
 import { StoreContext } from '../context/StoreContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 const Navbar = ({setShowLogin}) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isNotiVisible, setIsNotiVisible] = useState(false);
   const {token, setToken} = useContext(StoreContext);
   const url="http://localhost:8000";
-
+  const [user, setUser] = useState(null);
   const togglePopup = () => {
     setIsPopupVisible(!isPopupVisible);
   };
   const toggleNoti = () => {
     setIsNotiVisible(!isNotiVisible);
   }
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("ID");
+    setToken(null);
+    setShowLogin(false);
+}
 
+const copyPhoneToClipboard =() =>{
 
+  navigator.clipboard.writeText("0123465232");
+  alert("Đã sao chép số hotline: 0123465232 và bộ nhớ tạm");
+}
 
-// HUHU Nó sai ở đâu á, chổ này là tui có ID để đi tìm rồi nè: localStorage.getItem("ID"), mà tìm nàm shaooooo?
-  const getUserPro5ById = async () => {
-    try {
-        const response = await axios.get(`${url}/api/user/${localStorage.getItem("ID")}`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}` // Thêm token vào header
-            }
-        });
-        return response.data.firstName;
-    } catch (error) {
-        console.error("Error fetching user profile:", error.message);
-    }
+ // Hàm lấy thông tin người dùng
+ const getUserPro5ById = async () => {
+  try {
+    const userId = localStorage.getItem("ID");
+    const response = await axios.get(`${url}/api/user/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // Thêm token vào header
+      },
+    });
+    setUser(response.data); // Lưu thông tin người dùng
+  } catch (error) {
+    console.error("Lỗi khi lấy thông tin người dùng:", error.message);
+  }
 };
+
+
+// Gọi API khi component được mount
+useEffect(() => {
+  if (token) {
+    getUserPro5ById();
+  }
+}, [token]);
 
   return (
     <div className='Navbar'>
@@ -57,7 +77,7 @@ const Navbar = ({setShowLogin}) => {
     <SearchOutlinedIcon/>
 </div>
 
-        <div className="button-hotline">
+        <div className="button-hotline" onClick={()=>copyPhoneToClipboard()}>
           <PhoneAndroidOutlinedIcon/>
           Hotline: +84 123 465 232
         </div>
@@ -71,24 +91,30 @@ const Navbar = ({setShowLogin}) => {
       )}
         <div className='cart-button' onClick={togglePopup}><ShoppingCartOutlinedIcon sx={{ color:'white' }} /></div>
         {isPopupVisible && (
-        <div className='cart-popup'>
-          <Cart/>
-        </div>
-      )}
+          <div className='cart-popup'>
+            <Cart/>
+          </div>
+        )}
+
         {!token?
             <div onClick={()=>setShowLogin(true)} className="button-signin" >
                <h > Sign in</h>
             </div> :
             <div onClick={()=>setShowLogin(true)} className="profile" >
               <div className="loged-indicator">
-                <ToggleOnRoundedIcon/></div> 
-                Đã đăng nhập
+                <ToggleOnRoundedIcon/>
+                <p className="log-state">Đã đăng nhập</p>
+                </div> 
+
               <ul className="pro5-dropdown">
-                <li>Đặng Tuấn</li> 
-                {/* Tên người dùng sẽ hiển thị ở đây*/}
+              {user && (
+              <li className="user-name">
+                {user.firstName} {user.lastName} {/* Hiển thị tên người dùng */}
+              </li>
+            )}
                 <hr />
-                <ArrowOutwardRoundedIcon/>
-                <li>Đăng xuất</li>
+                
+                <li onClick={()=>logout()}>Đăng xuất <ArrowOutwardRoundedIcon/> </li>
               </ul>
             </div>
         }
