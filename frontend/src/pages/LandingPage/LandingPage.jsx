@@ -3,6 +3,8 @@ import Banner from "../../components/Banner/banner"
 import Catalog from "../../components/Catalog"
 import Criteria from '../../components/Criteria'
 import ProductList from '../../components/Item/ProductList'
+import FbComponent from '../../components/testFlowbite'
+import Footer from "../../components/Footer/Footer"
 
 const LandingPage = () => {
   return (
@@ -21,7 +23,8 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-      
+      {/* <div className='rounded-xl'><FbComponent></FbComponent></div> */}
+      {/* <div><Footer></Footer></div> */}
     </div>
 
   )
