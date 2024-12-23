@@ -14,7 +14,7 @@ const ProductList = () => {
   // Hàm gọi API để lấy dữ liệu sản phẩm
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/product/getAllProduct?page=1&limit=10')
+      .get('http://localhost:8000/api/product/getAllProduct?page=1&limit=100')
       .then((response) => {
         const apiProducts = response.data.products.map((product) => ({
           id: product._id,

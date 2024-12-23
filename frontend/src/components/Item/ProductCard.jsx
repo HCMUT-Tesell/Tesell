@@ -40,12 +40,12 @@ const ProductCard = ({
   }
 
   return (
-    <div className="w-[236px] h-[385px] border border-gray-300 rounded-lg p-4 flex flex-col items-center shadow-sm transform hover:scale-110" onClick={handleNavigate} >
+    <div className="w-[236px] h-[400px] border border-gray-300 rounded-lg p-4 my-5 flex flex-col items-center shadow-sm transform hover:scale-110 hover:cursor-pointer" onClick={handleNavigate} >
       {/* Hình ảnh sản phẩm */}
       <img src={image} alt={name} className="w-[200px] h-[200px] object-cover rounded-md " />
 
       {/* Tên sản phẩm */}
-      <div className="w-[188px] h-[32px] mt-2 text-center text-sm font-semibold text-gray-800 overflow-hidden">
+      <div className="w-[188px] min-h-[32px] h-fit mt-2 text-center text-sm font-semibold text-gray-800">
         {productName}
       </div>
 
