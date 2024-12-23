@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import Category from '../models/Category.model.js';
 import Product from '../models/Product.model.js';
 
-
 class CategoryController {
     // [GET] /api/category/getAllCategory
     async getAllCategory (req, res) {
@@ -67,6 +66,15 @@ class CategoryController {
         } catch (error) {
             console.error(error)
             console.log('Loi xay ra o createCategory')
+        }
+    }
+    //[GET] /api/category/getIdCategoryByName
+    async getIdCategoryByName(categoryName) {
+        try {
+            const category = await Category.findOne({ categoryName });
+            return category ? category._id : null;
+        } catch (error) {
+            throw new Error('Error finding category by name: ' + error.message);
         }
     }
     //[GET] /api/category/:categoryId
