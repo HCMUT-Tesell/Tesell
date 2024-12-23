@@ -23,7 +23,7 @@ class UserController {
             cccd,
             birthDay,
             phone } = req.body;
-        console.log("o ham signUp" + email + " " + password)
+        console.log("o ham signUp " + email + " " + password)
     
         try {
             const existUser = await User.findOne({ email });

@@ -3,7 +3,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import RemoveCircleRoundedIcon from '@mui/icons-material/RemoveCircleRounded';
 import { useContext} from 'react';
-import { StoreContext } from '../context/StoreContext';
+import { StoreContext } from '../../context/StoreContext';
 
 const ProductCard = ({id, productName, description, image,
   imageUrl,

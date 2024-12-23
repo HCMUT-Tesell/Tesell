@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import plus_icon from '../assets/icons/plus.png'
 import subtract_icon from '../assets/icons/subtract.png'
 import { useContext } from 'react';
-import { StoreContext } from './context/StoreContext';
+import { StoreContext } from '../context/StoreContext';
 
 const formatCurrency = (number) => {
   return number.toLocaleString().replaceAll(",", ".");

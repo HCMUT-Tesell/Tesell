@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
-import { StoreContext } from '../context/StoreContext';
+import { StoreContext } from '../../context/StoreContext';
 import { toast } from 'react-toastify';
 
 const ProductList = () => {

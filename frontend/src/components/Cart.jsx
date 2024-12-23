@@ -3,7 +3,7 @@ import CartItem from './CartItem'
 import arrow_right from '../assets/icons/arrow_right.png'
 import { formatCurrency } from './CartItem'
 import  React, { useContext } from 'react'
-import { StoreContext } from './context/StoreContext'
+import { StoreContext } from '../context/StoreContext'
 
 
 const Cart = () => {

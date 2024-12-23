@@ -10,7 +10,7 @@ import ToggleOnRoundedIcon from '@mui/icons-material/ToggleOnRounded';
 import Cart from '../Cart'
 import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
 import Login from '../Login/Login';
-import { StoreContext } from '../context/StoreContext';
+import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -97,10 +97,10 @@ useEffect(() => {
         )}
 
         {!token?
-            <div onClick={()=>setShowLogin(true)} className="button-signin" >
+            <div onClick={()=>setShowLogin(true)} className="button-signin items-center justify-center transition-all" >
                <h > Sign in</h>
             </div> :
-            <div onClick={()=>setShowLogin(true)} className="profile" >
+            <div onClick={()=>setShowLogin(true)} className="profile " >
               <div className="loged-indicator">
                 <ToggleOnRoundedIcon/>
                 <p className="log-state">Đã đăng nhập</p>

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import products from '../../assets/products';
+import products from '../assets/products';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 

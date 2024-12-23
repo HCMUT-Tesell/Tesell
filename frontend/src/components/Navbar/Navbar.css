@@ -47,19 +47,17 @@
     display: flex;
     border-radius: 10px;
     padding: 6px;
-    margin: 10px;
+    margin: 20px;
     color: white;
-    justify-content: space-between;
     width: 100px;
-    transition: all 0.5s;
-
+    /* transition: all 0.5s; */
 }
 .button-signin:hover{
     cursor: pointer;
     background-color: #48b3ff;
     width: 120px;
-    padding-left: 20px;
-
+    /* padding-left: 20px; */
+    margin: 10px;
 }
 
 .cart-popup, .Log-popup {

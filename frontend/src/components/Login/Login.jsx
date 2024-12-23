@@ -4,7 +4,7 @@ import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import logo from '../../assets/logo.png'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { StoreContext } from '../context/StoreContext';
+import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
 
 
@@ -56,7 +56,7 @@ const Login = ({setShowLogin}) => {
         <form onSubmit={onLogin} className="login-popup-container">
             <div  className="login-popup-title" >
                 <img src={logo} alt="" />
-               <CloseIcon onClick={()=>setShowLogin(false)} />
+               <CloseIcon onClick={()=>setShowLogin(false)} className='hover:cursor-pointer'/>
             </div>
             <div className="state">
             <h2>{currState}</h2>
