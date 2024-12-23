@@ -18,7 +18,7 @@ const ProductList = () => {
       .then((response) => {
         const apiProducts = response.data.products.map((product) => ({
           id: product._id,
-          name: product.productName,
+          productName: product.productName,
           image: product.imageUrl,
           sellPrice: product.sellPrice,
           rating: Math.round(product.rating), // Làm tròn rating thành số nguyên
