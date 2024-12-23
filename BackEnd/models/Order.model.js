@@ -39,7 +39,7 @@ const Order = new Schema ({
         default: Date.now(),
     },
     status: {
-        type: String,
+        type: String, // paid, unpaid, pendingPayment
         required: true,
     },
     predictedShippedDate : {
