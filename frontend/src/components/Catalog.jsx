@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 
 const Catalog = () => {
-  const [activeTab, setActiveTab] = useState("phone");
+  const [activeTab, setActiveTab] = useState("bestselling");
 
   return (
     <div className="w-fit md:grid-cols-1">

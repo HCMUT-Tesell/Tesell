@@ -14,11 +14,17 @@ import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
+import ProductSearchList from "../Search/ProductSearchList";
 
 
 const Navbar = ({setShowLogin}) => {
   const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState('');
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' && searchInput.trim() !== '') {
+      navigate(`/SearchPage?search=${encodeURIComponent(searchInput.trim())}`); // Chuyển hướng đến SearchPage với query
+    }
+  };
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isNotiVisible, setIsNotiVisible] = useState(false);
@@ -76,10 +82,17 @@ useEffect(() => {
           <MenuOutlinedIcon/>
         </div>
         
-<div className="search-bar-container">
-    <input type="text" placeholder="Tìm kiếm..." className="search-input" />
-    <SearchOutlinedIcon/>
-</div>
+        <div className="search-bar-container">
+          <input 
+            type="text" 
+            placeholder="Tìm kiếm sản phẩm..." 
+            className="search-input" 
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={handleSearch}
+            />
+          <SearchOutlinedIcon/>
+        </div>
 
         <div className="button-hotline" onClick={()=>copyPhoneToClipboard()}>
           <PhoneAndroidOutlinedIcon/>

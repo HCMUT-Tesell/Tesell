@@ -7,7 +7,7 @@ import OrderDetail from './pages/OrderDetail/OrderDetail'
 import Login from './components/Login/Login'
 import React from 'react'
 import { useState } from 'react'
-import CategoryPage from './pages/CategoryPage/CategoryPage'
+import SearchPage from './pages/SearchPage/SearchPage'
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false)
@@ -20,7 +20,7 @@ const App = () => {
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/ProductDetail' element={<ProductDetail/>}/>
         <Route path='/OrderDetail' element={<OrderDetail/>}/>
-        <Route path='/CategoryPage' element={<CategoryPage/>}/>
+        <Route path='/SearchPage' element={<SearchPage/>}/>
       </Routes>
     </div>
     </>

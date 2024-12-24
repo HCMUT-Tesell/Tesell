@@ -2,11 +2,14 @@
 import Banner from "../../components/Banner/banner"
 import Catalog from "../../components/Catalog"
 import Criteria from '../../components/Criteria'
-import ProductList from '../../components/Item/ProductList'
+import ProductSearchList from "../../components/Search/ProductSearchList"
 import ProductFilter from '../../components/testFlowbite'
 import CurrencyInput from "../../components/Footer/Footer"
 
-const CategoryPage = () => {
+const SearchPage = () => {
+  const [searchParams] = useSearchParams(); // Lấy query params từ URL
+  const searchQuery = searchParams.get('search') || ''; // Lấy giá trị từ "search"
+  
   return (
     <div className='flex flex-col'>
       <div className='p-8 flex flex-row gap-4'>
@@ -18,15 +21,15 @@ const CategoryPage = () => {
             <ProductFilter/>
           </div>
           <div className='w-full h-full'>
-            <ProductList/>
+            <ProductSearchList searchQuery={searchQuery} />
           </div>
         </div>
       </div>
       {/* <div className='rounded-xl'><ProductFilter></ProductFilter></div> */}
-      <div><CurrencyInput></CurrencyInput></div>
+      {/* <div><CurrencyInput></CurrencyInput></div> */}
     </div>
 
   )
 }
 
-export default CategoryPage
+export default SearchPage
