@@ -13,9 +13,13 @@ import Login from '../Login/Login';
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const Navbar = ({setShowLogin}) => {
+  const navigate = useNavigate();
+
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isNotiVisible, setIsNotiVisible] = useState(false);
   const {token, setToken} = useContext(StoreContext);
@@ -65,7 +69,7 @@ useEffect(() => {
 
   return (
     <div className='Navbar'>
-        <img src={logo_circle} alt="" className="logo" />
+        <img src={logo_circle} alt="" className="logo hover:cursor-pointer" onClick={() => navigate(`/`)}/>
 
         <div className="button-danh-muc">
           Danh mục sản phẩm 

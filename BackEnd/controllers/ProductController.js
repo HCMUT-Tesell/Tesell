@@ -47,7 +47,8 @@ class ProductController {
                 let categoryId;
                 try {
                     categoryId = await Category.findOne({ categoryName: category });
-                    // console.log(categoryId)
+                    // console.log(categoryId);
+                    // console.log(categoryId._id);
                     if (!categoryId) {
                         return res.status(404).json({ message: 'CategoryId not found by Name' });
                     }
@@ -56,7 +57,7 @@ class ProductController {
                 }
                 // Filter category by category(name)
                 if (categoryId) {
-                    query.category = categoryId;
+                    query.category = category;
                 }
             }
         
