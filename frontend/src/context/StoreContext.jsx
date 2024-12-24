@@ -1,11 +1,22 @@
 import { createContext } from 'react';
-import products from '../assets/products';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
+
+  const [products, setProducts] = useState([]);
+
+  
+  useEffect(() => {
+    fetch('http://localhost:8000/api/product/getAllProduct?page=1&limit=100')
+       .then(response => response.json())
+       .then(data => setProducts(data.products))
+  }, [])
+  
+  console.log('products: ', products);
+
+
     const [cartItems, setCartItems] = useState({});
     const url ="http://localhost:8000";
     const [token, setToken] = useState("");
@@ -16,6 +27,8 @@ const StoreContextProvider = (props) => {
         else {
           setCartItems((prev)=>({...prev, [_id]: prev[_id] + 1}));
         }
+        console.log('cartItems[_id]: ', cartItems[_id]);
+        
     
     }
     const removeFromCart = (_id) => {
