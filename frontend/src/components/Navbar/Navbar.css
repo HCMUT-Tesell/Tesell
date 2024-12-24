@@ -1,5 +1,4 @@
 
-
 .Navbar{
     display: flex;
     padding: 10px 10px;
@@ -14,11 +13,11 @@
 }
 .search-bar-container{
     display: flex;
-    gap: 30px;
-    align-items:end;
-    background-color: white;
+    align-items:center;
+    background-color: rgb(255, 255, 255);
     padding: 9px;
     gap: 100px;
+    box-sizing: border-box;
     justify-content: space-between;
     border-radius: 40px;
 }
@@ -48,22 +47,20 @@
     display: flex;
     border-radius: 10px;
     padding: 6px;
-    margin: 10px;
+    margin: 20px;
     color: white;
-    justify-content: space-between;
     width: 100px;
-    transition: all 0.5s;
-
+    /* transition: all 0.5s; */
 }
 .button-signin:hover{
     cursor: pointer;
     background-color: #48b3ff;
     width: 120px;
-    padding-left: 20px;
-
+    /* padding-left: 20px; */
+    margin: 10px;
 }
 
-.cart-popup {
+.cart-popup, .Log-popup {
     position: absolute;
     top: 90px; /* Adjust as needed */
     right: 40px; /* Adjust as needed */
@@ -90,8 +87,59 @@
     box-shadow: #0C5282;
     border-radius: 20px;
 }
-.sb-text{
-    font-size: 20px;
-    font-weight: light;
-    color: #0c53825e;
+.search-input{
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border-radius: 40px;
+}
+
+.profile{
+    position: relative;
+    color: white;
+    align-items: center;
+    justify-content: center;
+
+}
+.pro5-dropdown{
+    cursor: pointer;
+    position:absolute;
+    display:none;
+    right: 0;
+    z-index:1;
+
+}
+.profile:hover .pro5-dropdown{
+    display: flex;
+    flex-direction: column;
+    color: black;
+    gap:10px;
+    background-color: #ffffff;
+    padding: 12px 25px;
+    border: #48b3ff solid 2px;
+    border-radius: 15px;
+    width: max(200px, 15vw);
+
+}
+
+
+@media screen and (max-width: 999px){
+    .button-danh-muc{
+        display: none;
+    }
+    .button-hotline{
+        display: none;
+    }
+
+    .cart-popup{
+        display: none;
+    }
+    .noti-icon, .noti-popup{
+        display: none;
+    }
+    .loged-indicator p{
+        display: none;
+    }
 }

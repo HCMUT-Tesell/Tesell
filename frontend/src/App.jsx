@@ -4,11 +4,17 @@ import Navbar from './components/Navbar/Navbar'
 import LandingPage from './pages/LandingPage/LandingPage'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 import OrderDetail from './pages/OrderDetail/OrderDetail'
+import Login from './components/Login/Login'
+import React from 'react'
+import { useState } from 'react'
 
 const App = () => {
+  const [showLogin, setShowLogin] = useState(false)
   return (
-    <div>
-      <Navbar/>
+    <>
+    {showLogin?<Login setShowLogin={setShowLogin}/>:<></>}
+    <div className='app'>
+      <Navbar setShowLogin={setShowLogin} />
       <Routes>
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/ProductDetail' element={<ProductDetail/>}>
@@ -17,6 +23,7 @@ const App = () => {
         <Route path='/OrderDetail' element={<OrderDetail/>}/>
       </Routes>
     </div>
+    </>
   )
 }
 

@@ -1,8 +1,19 @@
-import bcrypt from 'bcryptjs';
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+//import validator from "validator";
 import mongoose from 'mongoose';
 import User from '../models/User.model.js';
 
+
+const createToken = (id) => {
+    return jwt.sign({id},process.env.JWT_SECRET)
+}
+
+
+
+
 class UserController {
+    
     // [POST] /api/user/signUp
     async signUp(req, res) {
         const { email, password, firstName,
@@ -12,12 +23,12 @@ class UserController {
             cccd,
             birthDay,
             phone } = req.body;
-        console.log("o ham signUp" + email + " " + password)
+        console.log("o ham signUp " + email + " " + password)
     
         try {
             const existUser = await User.findOne({ email });
             if (existUser) {
-                return res.status(400).json({ message: 'Email đã tồn tại!' }); 
+                return res.status(400).json({success:false,message: 'Email đã tồn tại!' }); 
             }
     
             const hashedPassword = await bcrypt.hash(password, 10);
@@ -34,14 +45,14 @@ class UserController {
                 phone
             });
     
-            await newUser.save();
-    
+            const user = await newUser.save();
+            const token = createToken(user._id);
             console.log("User created:", email);
-            res.json({ message: 'Tạo người dùng thành công!' });
+            return res.json({success:true,token, _id:user._id});
     
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Đã có lỗi xảy ra khi tạo người dùng!' });
+            res.status(500).json({success:false,message: 'Đã có lỗi xảy ra khi tạo người dùng!' });
         }
     }
     
@@ -59,11 +70,14 @@ class UserController {
             if (!isMatch) {
                 return res.status(400).json({ message: 'Mật khẩu không chính xác!' });
             }
-
-            res.json({ message: 'Đăng nhập thành công!', email: user.email });
+            const token = createToken(user._id);
+            // localStorage.setItem("_Id",user._id);
+            console.log(user._id);
+            return res.json({success:true,token, _id:user._id});
+            //res.json({ message: 'Đăng nhập thành công!', email: user.email });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Đã có lỗi xảy ra khi đăng nhập!' });
+            res.status(500).json({message: 'Đã có lỗi xảy ra khi đăng nhập!' });
         }
     }
     // [GET] /api/user/getAllUser
@@ -212,6 +226,7 @@ class UserController {
         }
     }
 }
+
 
 // module.exports = new UserController();
 export default new UserController();

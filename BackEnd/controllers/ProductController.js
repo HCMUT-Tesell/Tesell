@@ -119,12 +119,17 @@ class ProductController {
             numberReviews,
             isFeature,
             brand } = req.body;
-        console.log("o ham ProductCreate" + productName + description)
+        console.log("o ham ProductCreate" + productName)
     
         try {
             const existProduct = await Product.findOne({ productName });
             if (existProduct) {
                 return res.status(400).json({ message: 'Product đã tồn tại!' }); 
+            }
+
+            const isExistCategory = await Category.findOne({categoryName: category});
+            if (!isExistCategory) {
+                return res.status(400).json({ message: 'Category không tồn tại' }); 
             }
     
             const newProduct = new Product({
