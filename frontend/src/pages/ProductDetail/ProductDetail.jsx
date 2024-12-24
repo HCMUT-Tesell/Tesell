@@ -1,45 +1,39 @@
 import './ProductDetail.css'
 import { useParams } from 'react-router-dom'
-import image from '../../assets/images/1.jpg'
 import { formatCurrency } from '../../components/CartItem'
-import subtract_icon from '../../assets/icons/subtract.png'
-import plus_icon from '../../assets/icons/plus.png'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import RemoveCircleRoundedIcon from '@mui/icons-material/RemoveCircleRounded';
 import ProductCard from '../../components/Item/ProductCard'
 import { useContext, useState } from 'react'
-import { StoreContext } from '../../components/context/StoreContext'
+import { StoreContext } from '../../context/StoreContext'
+import CartItem from './../../components/CartItem';
+import products from './../../assets/products';
 
 const ProductDetail = () => {
   const { productId } = useParams()
-  const { products, cartItems, addToCart } = useContext(StoreContext)
-  
+  const { products, addToCart, removeFromCart, cartItems } = useContext(StoreContext)
+  console.log('products', products);
   const product = products.find((pr) => pr._id === (productId))
+  console.log('product', product);
+  
   const others = products.slice(-4);
-  const [ amountOfProduct, setAmountOfProduct ] = useState(1);
   const date = new Date();
   date.setDate(date.getDate() + 2); 
   const formattedDate = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
-  const addAll = () => {
-    console.log('amountOfProduct: ',amountOfProduct); 
-    for(let i = 0; i < amountOfProduct; ++i) {
-      addToCart(product._id); 
-    } 
-  }
 
   return (
     <div className='flex p-5 gap-5 items-start'>
         <div className='w-1/3 flex flex-col justify-center items-center px-5 py-4 gap-5 bg-white drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-lg'>
           <div className='drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'>
-            <img className='w-[200px] rounded-[10px]' src={product.imageUrl} alt="" />
+            <img className='w-[200px] rounded-[10px]' src={product.imageUrl ? product.imageUrl : product.image} alt="" />
           </div>
 
           <div className='flex gap-2'>
-            <img className='w-[70px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]' src={product.imageUrl} alt="" />
-            <img className='w-[70px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]' src={product.imageUrl} alt="" />
-            <img className='w-[70px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]' src={product.imageUrl} alt="" />
-            <img className='w-[70px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]' src={product.imageUrl} alt="" />
+            <img className='w-[70px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]' src={product.imageUrl ? product.imageUrl : product.image} alt="" />
+            <img className='w-[70px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]' src={product.imageUrl ? product.imageUrl : product.image} alt="" />
+            <img className='w-[70px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]' src={product.imageUrl ? product.imageUrl : product.image} alt="" />
+            <img className='w-[70px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]' src={product.imageUrl ? product.imageUrl : product.image} alt="" />
           </div>
           <div className='w-full'>
             <span className='flex font-bold text-[20px] leading-[28px] text-[#1C1C28]'>Đặc điểm nổi bật </span>
@@ -60,23 +54,24 @@ const ProductDetail = () => {
                   </span>
               </div>
               <div className='flex flex-wrap justify-center items-center content-center p-2 gap-3 bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px] w-1/4'>
-                <div className='gap-6 flex items-center justify-center'>
+                {cartItems[product._id] ? (<div className='gap-6 flex items-center justify-center'>
                   <span className='font-montserrat font-normal text-[14px] leading-[17px] text-black flex-none order-0 grow-0'>Số lượng:</span>
                   <div className='bg-none md:bg-[#93C8ED] flex h-3 rounded-xl items-center justify-center md:h-[40px] md:rounded-3xl  md:items-center md:gap-[8px] p-3'>
-                      <div className='size-5 md:size-6 md:items-center cursor-pointer' onClick={() => amountOfProduct > 1 ? setAmountOfProduct(prev => prev - 1) : 1}>
+                      <div className='size-5 md:size-6 md:items-center cursor-pointer' onClick={() => removeFromCart(product._id)}>
                         <RemoveCircleRoundedIcon />
                       </div>
-                      <span className='items-center justify-center flex py-1 w-4 text-[8px] md:p-0 md:text-[18px] md:w-[56px] text-black'>{amountOfProduct}</span>
-                      <div className='size-4 md:size-6 cursor-pointer' onClick={() => {setAmountOfProduct(prev => prev + 1);}
-                      }>
+                      <span className='items-center justify-center flex py-1 w-4 text-[8px] md:p-0 md:text-[18px] md:w-[56px] text-black'>{cartItems[product._id]}</span>
+                      <div className='size-4 md:size-6 cursor-pointer' onClick={() => addToCart(product._id)}
+                      >
                         <AddCircleRoundedIcon />                      
                       </div>
                     </div>
-                </div>
-                <div className="w-[200px] h-[40px] mt-2 bg-blue-500 text-white rounded-md flex items-center justify-center cursor-pointer" onClick={addAll}>
+                </div>):(
+                <div className="w-[200px] h-[40px] mt-2 bg-blue-500 text-white rounded-md flex items-center justify-center cursor-pointer" onClick={() => addToCart(product._id)
+                }>
                   <AddShoppingCartIcon />
                   <span className="ml-2">Thêm vào giỏ hàng</span>
-                </div>
+                </div>)}
               </div>
           </div>
           <div className="gap-3 flex flex-col justify-center items-center p-4 isolation-isolate  bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px]">
@@ -109,8 +104,9 @@ const ProductDetail = () => {
           <div className="gap-4 flex flex-col justify-center items-center px-5 py-3 isolation-isolate  bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px]">
             <span className='pt-8 flex w-full font-inter font-bold text-[24px] leading-[32px] text-black flex-none order-0 grow-0 z-0'>Sản phẩm khác</span>
             <div className='grid grid-cols-3 gap-x-[60px] gap-y-5'>
-              {others.map((item, index) => {                
-                 return (<ProductCard key={index} {...item} />)
+              {others.map((item, ) => { 
+                const newItem = {...item, id: item._id};
+                 return (<ProductCard  {...newItem} key={item._id} />)
                 })}
             </div>
           </div>

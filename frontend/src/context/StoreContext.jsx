@@ -9,7 +9,7 @@ const StoreContextProvider = (props) => {
 
   
   useEffect(() => {
-    fetch('http://localhost:8000/api/product/getAllProduct')
+    fetch('http://localhost:8000/api/product/getAllProduct?page=1&limit=100')
        .then(response => response.json())
        .then(data => setProducts(data.products))
   }, [])
