@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 import { StoreContext } from '../../context/StoreContext';
 import { toast } from 'react-toastify';
 
-const ProductList = () => {
+const ProductList = ({ category}) => {
   const [products, setProducts] = useState([]); // Danh sách sản phẩm từ API
   const [loading, setLoading] = useState(true); // Trạng thái tải dữ liệu
   const [error, setError] = useState(null); // Trạng thái lỗi khi gọi API
@@ -14,7 +14,7 @@ const ProductList = () => {
   // Hàm gọi API để lấy dữ liệu sản phẩm
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/product/getAllProduct?page=1&limit=100')
+      .get(`http://localhost:8000/api/product/getAllProduct?limit=100&${category}`)
       .then((response) => {
         const apiProducts = response.data.products.map((product) => ({
           id: product._id,
@@ -31,7 +31,7 @@ const ProductList = () => {
         setError('Không thể tải dữ liệu sản phẩm.');
         setLoading(false);
       });
-  }, [products]); // useEffect chỉ gọi một lần khi component được render lần đầu tiên
+  }, [category]); // Gọi lại api mỗi khi category thay đổi
 
   const handleAddToCart = (product) => {
     setCart([...cart, product]);
