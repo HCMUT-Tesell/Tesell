@@ -1,8 +1,22 @@
 import { useState } from 'react'
 
 
-const Catalog = () => {
-  const [activeTab, setActiveTab] = useState("phone");
+const Catalog = ({ onCategoryChange }) => {
+  const [activeTab, setActiveTab] = useState("bestselling");
+
+  const tabMapping = {
+    laptop: "category=Laptop",
+    phone: "category=Phone",
+    accessories: "category=Accessory_Watch",
+    new: "sort=newest",
+    prominent: "rating=5",
+    bestselling: "page=1",
+  }
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+    const mappedValue = tabMapping[tab] || "";
+    onCategoryChange(mappedValue); // Gửi danh mục được chọn về ProductList
+  };
 
   return (
     <div className="w-fit md:grid-cols-1">
@@ -14,20 +28,20 @@ const Catalog = () => {
         <ul className="grid grid-cols-4 p-2 gap-x-2 gap-y-1 md:flex md:flex-col md:pl-[20px] md:gap-10 xl:pl-[52px] xl:gap-[40px]">
           {/* Nổi bật */}
           <span
-            onClick={() => setActiveTab("prominent")}
+            onClick={() => handleTabClick("prominent")}
             className={` ${activeTab === "prominent" ? `text-[#0E6199]` : `text-black`
               }  flex font-normal text-left text-[12px] cursor-pointer max-h-7  md:text-left xl:text-[18px] xl:font-normal`}
-            href=""
+            // href=""
           >
             Nổi bật
           </span>
           
           {/* Sản phẩm mới */}
           <span
-            onClick={() => setActiveTab("new")}
+            onClick={() => handleTabClick("new")}
             className={` ${activeTab === "new" ? `text-[#0E6199]` : `text-black`
               }  flex font-normal text-left text-[12px] cursor-pointer max-h-7  md:text-left xl:text-[18px] xl:font-normal`}
-            href=""
+            // href=""
           >
             Sản phẩm mới
           </span>
@@ -35,40 +49,40 @@ const Catalog = () => {
           
           {/* Bán chạy */}
           <span
-            onClick={() => setActiveTab("bestselling")}
+            onClick={() => handleTabClick("bestselling")}
             className={` ${activeTab === "bestselling" ? `text-[#0E6199]` : `text-black`
               }  flex font-normal text-left text-[12px] cursor-pointer max-h-7  md:text-left xl:text-[18px] xl:font-normal`}
-            href=""
+            // href=""
           >
             Bán chạy
           </span>
           
           {/* Điện thoại */}
           <span
-            onClick={() => setActiveTab("phone")}
+            onClick={() => handleTabClick("phone")}
             className={` ${activeTab === "phone" ? `text-[#0E6199]` : `text-black`
               }  flex font-normal text-left  text-[12px] cursor-pointer max-h-7 md:text-left xl:text-[18px] xl:font-normal`}
-            href=""
+            // href=""
           >
             Điện thoại
           </span>
           
           {/* Laptop */}
           <span
-            onClick={() => setActiveTab("laptop")}
+            onClick={() => handleTabClick("laptop")}
             className={` ${activeTab === "laptop" ? `text-[#0E6199]` : `text-black`
               }  flex font-normal text-left text-[12px] cursor-pointer max-h-7  md:text-left xl:text-[18px] xl:font-normal`}
-            href=""
+            // href=""
           >
             Laptop
           </span>
 
           {/* Phụ kiện - Đồng hồ */}
           <span
-            onClick={() => setActiveTab("accessories")}
+            onClick={() => handleTabClick("accessories")}
             className={` ${activeTab === "accessories" ? `text-[#0E6199]` : `text-black`
               }  flex font-normal text-left text-[12px] cursor-pointer max-h-7  md:text-left xl:text-[18px] xl:font-normal`}
-            href=""
+            // href=""
           >
             Phụ kiện - Đồng hồ
           </span>
