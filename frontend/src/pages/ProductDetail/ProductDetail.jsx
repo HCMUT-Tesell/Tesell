@@ -76,9 +76,9 @@ const ProductDetail = () => {
           </div>
           <div className="gap-3 flex flex-col justify-center items-center p-4 isolation-isolate  bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px]">
             <span className='flex w-full font-inter font-bold text-[24px] leading-[32px] text-black flex-none order-0 grow-0 z-0'>Thông tin vận chuyển</span>
-            <input className='font-inter font-normal text-[20px] leading-[42px] text-black px-3 w-full box-border bg-white border border-black rounded-[5px] flex-none order-1 grow-0 z-10' placeholder='Giao đến: 89 Lê Thánh Tôn, Bến Nghé, Quận 1, TP. HCM'/>            
-            <span className='font-inter font-normal text-[20px] leading-[42px] text-black px-3 w-full box-border bg-white border border-black rounded-[5px] flex-none order-1 grow-0 z-10'>Ngày dự kiến giao: {formattedDate}</span>            
-            <span className='font-inter font-normal text-[20px] leading-[42px] text-black px-3 w-full box-border bg-white border border-black rounded-[5px] flex-none order-1 grow-0 z-10'>Phí vận chuyển (tạm tính): 50.000 đ</span>            
+            <input className='font-inter font-normal text-[20px] leading-[42px] text-black px-3 w-full box-border bg-white border border-black rounded-[5px] flex-none order-1 grow-0 z-0' placeholder='Giao đến: 89 Lê Thánh Tôn, Bến Nghé, Quận 1, TP. HCM'/>            
+            <span className='font-inter font-normal text-[20px] leading-[42px] text-black px-3 w-full box-border bg-white border border-black rounded-[5px] flex-none order-1 grow-0 z-0'>Ngày dự kiến giao: {formattedDate}</span>            
+            <span className='font-inter font-normal text-[20px] leading-[42px] text-black px-3 w-full box-border bg-white border border-black rounded-[5px] flex-none order-1 grow-0 z-0'>Phí vận chuyển (tạm tính): 50.000 đ</span>            
           </div>
           <div className="gap-4 flex flex-col justify-center items-center px-5 py-3 isolation-isolate  bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px]">
             <span className='flex w-full font-inter font-bold text-[24px] leading-[32px] text-black flex-none order-0 grow-0 z-0'>Thông tin sản phẩm</span>
