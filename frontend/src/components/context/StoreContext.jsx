@@ -1,10 +1,23 @@
 import { createContext } from 'react';
-import products from '../../assets/products';
+//import products from '../../assets/products';
 import { useState, useEffect } from 'react';
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
+
+  const [products, setProducts] = useState([]);
+
+  
+  useEffect(() => {
+    fetch('http://localhost:8000/api/product/getAllProduct')
+       .then(response => response.json())
+       .then(data => setProducts(data.products))
+  }, [])
+  
+  console.log('products: ', products);
+
+
     const [cartItems, setCartItems] = useState({});
     const addToCart = (_id) => {
         if (!cartItems[_id]) {
@@ -13,6 +26,8 @@ const StoreContextProvider = (props) => {
         else {
           setCartItems((prev)=>({...prev, [_id]: prev[_id] + 1}));
         }
+        console.log('cartItems[_id]: ', cartItems[_id]);
+        
     
     }
     const removeFromCart = (_id) => {

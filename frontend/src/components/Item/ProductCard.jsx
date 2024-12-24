@@ -4,6 +4,7 @@ import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import RemoveCircleRoundedIcon from '@mui/icons-material/RemoveCircleRounded';
 import { useContext} from 'react';
 import { StoreContext } from '../context/StoreContext';
+import { Link } from 'react-router-dom'
 
 const ProductCard = ({id, productName, description, image,
   imageUrl,
@@ -22,7 +23,8 @@ const ProductCard = ({id, productName, description, image,
   return (
     <div className="w-[236px] h-[385px] border border-gray-300 rounded-lg p-4 flex flex-col items-center m-3">
       {/* Hình ảnh sản phẩm */}
-      <img src={image} alt={productName} className="w-[200px] h-[200px] object-cover rounded-md"/>
+      <Link to={`/ProductDetail/${id}`}><img src={imageUrl} alt={productName} onClick={window.scrollTo(0, 0)} className="w-[200px] h-[200px] object-cover rounded-md"/></Link>
+      
 
       {/* Tên sản phẩm */}
       <div className="w-[188px] h-[32px] mt-2 text-center text-sm font-semibold text-gray-800 overflow-hidden">
