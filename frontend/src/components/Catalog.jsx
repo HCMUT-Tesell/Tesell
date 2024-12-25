@@ -1,9 +1,10 @@
-import { useState } from 'react'
-
+import { useContext, useState, useEffect } from 'react'
+import { StoreContext } from '../context/StoreContext';
 
 const Catalog = () => {
-  const [activeTab, setActiveTab] = useState("phone");
-
+  const [activeTab, setActiveTab] = useState("Phone");
+  const { setCategory } = useContext(StoreContext)
+  
   return (
     <div className="w-fit md:grid-cols-1">
       <div className="block  items-center bg-[#E8F3FB] rounded-[10px] md:min-h-[500px] xl:w-[250px] xl:h-[550px]">
@@ -45,8 +46,8 @@ const Catalog = () => {
           
           {/* Điện thoại */}
           <span
-            onClick={() => setActiveTab("phone")}
-            className={` ${activeTab === "phone" ? `text-[#0E6199]` : `text-black`
+            onClick={() => {setActiveTab("Phone"); setCategory("Phone")}}
+            className={` ${activeTab === "Phone" ? `text-[#0E6199]` : `text-black`
               }  flex font-normal text-left  text-[12px] cursor-pointer max-h-7 md:text-left xl:text-[18px] xl:font-normal`}
             href=""
           >
@@ -55,8 +56,8 @@ const Catalog = () => {
           
           {/* Laptop */}
           <span
-            onClick={() => setActiveTab("laptop")}
-            className={` ${activeTab === "laptop" ? `text-[#0E6199]` : `text-black`
+            onClick={() => {setActiveTab("Laptop"); setCategory("Laptop")}}
+            className={` ${activeTab === "Laptop" ? `text-[#0E6199]` : `text-black`
               }  flex font-normal text-left text-[12px] cursor-pointer max-h-7  md:text-left xl:text-[18px] xl:font-normal`}
             href=""
           >
@@ -65,8 +66,8 @@ const Catalog = () => {
 
           {/* Phụ kiện - Đồng hồ */}
           <span
-            onClick={() => setActiveTab("accessories")}
-            className={` ${activeTab === "accessories" ? `text-[#0E6199]` : `text-black`
+            onClick={() => {setActiveTab("Accessory_Watch"); setCategory("Accessory_Watch")}}
+            className={` ${activeTab === "Accessory_Watch" ? `text-[#0E6199]` : `text-black`
               }  flex font-normal text-left text-[12px] cursor-pointer max-h-7  md:text-left xl:text-[18px] xl:font-normal`}
             href=""
           >

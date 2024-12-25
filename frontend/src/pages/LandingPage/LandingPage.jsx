@@ -5,7 +5,6 @@ import Criteria from '../../components/Criteria'
 import ProductList from '../../components/Item/ProductList'
 import FbComponent from '../../components/testFlowbite'
 import Footer from "../../components/Footer/Footer"
-
 const LandingPage = () => {
   return (
     <div className='flex flex-col'>

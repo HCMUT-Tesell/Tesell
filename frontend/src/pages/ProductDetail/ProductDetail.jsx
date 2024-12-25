@@ -8,7 +8,6 @@ import ProductCard from '../../components/Item/ProductCard'
 import { useContext, useState } from 'react'
 import { StoreContext } from '../../context/StoreContext'
 import CartItem from './../../components/CartItem';
-import products from './../../assets/products';
 
 const ProductDetail = () => {
   const { productId } = useParams()

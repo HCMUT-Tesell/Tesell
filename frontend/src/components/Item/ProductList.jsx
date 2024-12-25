@@ -8,9 +8,9 @@ const ProductList = () => {
   const [products, setProducts] = useState([]); // Danh sách sản phẩm từ API
   const [loading, setLoading] = useState(true); // Trạng thái tải dữ liệu
   const [error, setError] = useState(null); // Trạng thái lỗi khi gọi API
-
+  const { category } = useContext(StoreContext)
   const [cart, setCart] = useState([]);
-
+  
   // Hàm gọi API để lấy dữ liệu sản phẩm
   useEffect(() => {
     axios
@@ -22,6 +22,7 @@ const ProductList = () => {
           image: product.imageUrl,
           sellPrice: product.sellPrice,
           rating: Math.round(product.rating), // Làm tròn rating thành số nguyên
+          category: product.category
         }));
         setProducts(apiProducts); // Cập nhật danh sách sản phẩm
         setLoading(false); // Đánh dấu đã tải xong
@@ -39,10 +40,12 @@ const ProductList = () => {
   };
   if (loading) return <div>Đang tải dữ liệu...</div>;
   if (error) return <div>{error}</div>;
+  
+  
 
   return (
     <div className="flex flex-wrap p-8 justify-between ">
-      {products.map((item, index) => {
+      {products.filter((product) => product.category === category).map((item, index) => {
          return <ProductCard key={index} id={item.id} productName={item.productName} description={item.description} image={item.image}
          imageUrl = {item.imageUrl}
          buyPrice = {item.buyPrice}

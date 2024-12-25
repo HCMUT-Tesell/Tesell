@@ -6,6 +6,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
 
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState("Phone");
 
   
   useEffect(() => {
@@ -46,7 +47,9 @@ const StoreContextProvider = (props) => {
         removeFromCart,
         url,
         token,
-        setToken
+        setToken,
+        category,
+        setCategory
 
 
     }
