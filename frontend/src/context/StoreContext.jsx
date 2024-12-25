@@ -168,6 +168,8 @@ const StoreContextProvider = (props) => {
         const response2 = await axios.put(`${url}/api/order/${orderId}`, {
           orderDetail: orderDetailIds
         })
+        
+        await getUserOrder();
 
         if (response2.data.status) {
           alert("Cập nhật giỏ hàng thành công");
