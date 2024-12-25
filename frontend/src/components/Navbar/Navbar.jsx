@@ -39,6 +39,7 @@ const Navbar = ({ setShowLogin }) => {
     localStorage.removeItem("ID");
     setToken(null);
     setShowLogin(false);
+    setIsLoggedIn(false);
   }
 
   const copyPhoneToClipboard = () => {
@@ -60,6 +61,7 @@ const getUserPro5ById = async () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`, // Thêm token vào header
       },
     });
+    setIsLoggedIn(true);  
     setUser(response.data); // Lưu thông tin người dùng
   } catch (error) {
     console.error("Lỗi khi lấy thông tin người dùng:", error.message);
@@ -90,7 +92,7 @@ useEffect(() => {
   } else {
     console.error("Token not found in localStorage");
   }
-}, []);
+}, [token]);
 
   return (
     <div className='Navbar'>

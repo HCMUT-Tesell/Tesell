@@ -26,6 +26,16 @@ const Catalog = ({ onCategoryChange }) => {
         </span>
 
         <ul className="grid grid-cols-4 p-2 gap-x-2 gap-y-1 md:flex md:flex-col md:pl-[20px] md:gap-10 xl:pl-[52px] xl:gap-[40px]">
+          {/* Bán chạy */}
+          <span
+            onClick={() => handleTabClick("bestselling")}
+            className={` ${activeTab === "bestselling" ? `text-[#0E6199]` : `text-black`
+              }  flex font-normal text-left text-[12px] cursor-pointer max-h-7  md:text-left xl:text-[18px] xl:font-normal`}
+            // href=""
+          >
+            Bán chạy
+          </span>
+          
           {/* Nổi bật */}
           <span
             onClick={() => handleTabClick("prominent")}
@@ -47,15 +57,7 @@ const Catalog = ({ onCategoryChange }) => {
           </span>
 
           
-          {/* Bán chạy */}
-          <span
-            onClick={() => handleTabClick("bestselling")}
-            className={` ${activeTab === "bestselling" ? `text-[#0E6199]` : `text-black`
-              }  flex font-normal text-left text-[12px] cursor-pointer max-h-7  md:text-left xl:text-[18px] xl:font-normal`}
-            // href=""
-          >
-            Bán chạy
-          </span>
+          
           
           {/* Điện thoại */}
           <span
