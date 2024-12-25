@@ -44,10 +44,14 @@ const copyPhoneToClipboard =() =>{
   alert("Đã sao chép số hotline: 0123465232 và bộ nhớ tạm");
 }
 
- // Hàm lấy thông tin người dùng
- const getUserPro5ById = async () => {
+// Hàm lấy thông tin người dùng
+const getUserPro5ById = async () => {
   try {
     const userId = localStorage.getItem("ID");
+    if (!userId) {
+      console.error("User ID not found in localStorage");
+      return;
+    }
     const response = await axios.get(`${url}/api/user/${userId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`, // Thêm token vào header
@@ -62,10 +66,13 @@ const copyPhoneToClipboard =() =>{
 
 // Gọi API khi component được mount
 useEffect(() => {
+  const token = localStorage.getItem("token");
   if (token) {
     getUserPro5ById();
+  } else {
+    console.error("Token not found in localStorage");
   }
-}, [token]);
+}, []);
 
   return (
     <div className='Navbar'>
@@ -100,7 +107,7 @@ useEffect(() => {
           </div>
         )}
 
-        {!token?
+        {!localStorage.getItem("token") ?
             <div onClick={()=>setShowLogin(true)} className="button-signin items-center justify-center transition-all" >
                <h > Sign in</h>
             </div> :
