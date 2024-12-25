@@ -138,7 +138,7 @@ class OrderDetailController {
                 return res.status(400).json('orderDetail cannot be update!')
             }
 
-            return res.status(200).json(orderDetail)
+            return res.status(200).json({status: true, message: 'Order updated successfully', orderDetail})
 
         } catch (error) {
             return res.status(500).json({
