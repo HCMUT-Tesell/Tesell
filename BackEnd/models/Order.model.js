@@ -10,7 +10,6 @@ const Order = new Schema ({
     orderDetail: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'OrderDetail',
-        required: true
     }],
     shippingAddress:{
         type: String,
@@ -32,14 +31,15 @@ const Order = new Schema ({
         type: String,
     },
     totalPrice: {
-        type: Number
+        type: Number,
+        required: true,
     },
     dateOrdered: {
         type: Date,
-        default: Date.now(),
     },
     status: {
         type: String,
+        // đang chọn, đang chờ thanh toán, đang giao hàng, đã giao hàng
         required: true,
     },
     predictedShippedDate : {

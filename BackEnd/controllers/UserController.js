@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 //import validator from "validator";
 import mongoose from 'mongoose';
 import User from '../models/User.model.js';
+import Order from '../models/Order.model.js'
 
 
 const createToken = (id) => {
@@ -48,6 +49,21 @@ class UserController {
             const user = await newUser.save();
             const token = createToken(user._id);
             console.log("User created:", email);
+
+            const newOrder = new Order({
+                user: user._id,
+                orderDetail: [],
+                shippingAddress: address,
+                city: "HCM",
+                country: "Vietnam",
+                phone: phone,
+                note: "",
+                totalPrice: 0,
+                status: "selecting"
+            })
+
+            await newOrder.save();
+
             return res.json({success:true,token, _id:user._id});
     
         } catch (error) {

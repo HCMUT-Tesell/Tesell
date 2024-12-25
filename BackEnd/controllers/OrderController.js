@@ -123,10 +123,10 @@ class OrderController {
                 return res.status(404).json({ message: 'Order not found' });
             }
 
-            return res.status(200).json({ message: 'Order updated successfully', order: updatedOrder });
+            return res.status(200).json({ status: true, message: 'Order updated successfully', order: updatedOrder });
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ message: 'Error updating order' });
+            return res.status(500).json({ status: false, message: 'Error updating order' });
         }
     }
 
@@ -159,6 +159,26 @@ class OrderController {
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: 'Error restoring order' });
+        }
+    }
+
+    // [GET] api/order/user/:userID
+    async getOrderByUserID(req, res) {
+        try {
+            const userID = req.params.userID;
+            const order = await Order.findOne({user: userID});
+            if (!order) {
+                return res.status(404).json({
+                    message: 'Order not found'
+                })
+            }
+
+            return res.status(200).json({
+                order
+            })
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Error fetching order' });
         }
     }
 }
