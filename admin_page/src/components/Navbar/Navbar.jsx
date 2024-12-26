@@ -16,13 +16,13 @@ const Navbar = () => {
             <img src={logo_circle} alt="" className="logo"  />
         </div>
         <div className="navbar-center">
+            <div className="device">
+                <DevicesOtherRoundedIcon/>
+                <li>Product</li>
+            </div>
             <div className="user">
                 <PeopleAltRoundedIcon/>
                 <li>User</li>
-            </div>
-            <div className="device">
-                <DevicesOtherRoundedIcon/>
-                <li>Device</li>
             </div>
             <div className="manager">
                 <ManageAccountsRoundedIcon/>
