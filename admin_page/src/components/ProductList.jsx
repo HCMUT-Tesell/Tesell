@@ -28,7 +28,7 @@ const ProductList = ({ category }) => {
   if (error) return <div>{error}</div>;
   
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="flex flex-row flex-wrap gap-2">
       {products.map((item, index) => {
          return <ProductCard key={index} product={item} />
       })}

@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const ProductsPage = () => {
     const [selectedCategory, setSelectedCategory] = useState('bestselling');
-    const [addingProduct, setAddingProduct] = useState(true);
+    const [addingProduct, setAddingProduct] = useState(false);
     const [file, setFile] = useState(null);
     const [previewVisible, setPreviewVisible] = useState(false);
 
@@ -96,7 +96,7 @@ const ProductsPage = () => {
   return (
     <div className='flex flex-col gap-10'>
 
-        <div className='flex justify-between pt-10'>
+        <div className='flex justify-between pt-10 gap-5'>
             <div className='flex flex-col justify-between items-start pl-20'>
                 <Catalog onCategoryChange={setSelectedCategory}/>
                 <div className='fixed bottom-10 left-20'>
@@ -105,9 +105,9 @@ const ProductsPage = () => {
             </div>
             {addingProduct ? 
             <div className='relative box-border bg-[#E8F3FB] border border-[#127CC5] rounded-[20px] flex flex-col justify-between items-center mr-60'>
-                <span className='font-inter font-bold text-[20px] leading-[32px] text-black pt-3'>Thêm sản phẩm</span>
-                <span className='absolute top-8 right-4 cursor-pointer' onClick={()  => closeAddProduct(false)}><CancelIcon /></span>
-                <form action="post" onSubmit={handleSubmit} className='grid grid-cols-2 gap-12'>
+                <span className='font-inter font-bold text-[24px] leading-[32px] text-black pt-3'>Thêm sản phẩm</span>
+                <span className='absolute top-4 right-4 cursor-pointer' onClick={()  => closeAddProduct(false)}><CancelIcon /></span>
+                <form action="post" onSubmit={handleSubmit} className='flex flex-row justify-center gap-3'>
                     <div className='flex flex-col gap-2 pb-8 pl-8'>
                         <label className='font-inter font-bold text-[20px] leading-[32px] text-black' htmlFor="productName">Tên sản phẩm</label>
                         <input className='font-inter p-4 w-[420px] h-[40px] bg-[#D9D9D9] rounded-[20px]' type="text" required name='productName' id='productName'/>
@@ -166,7 +166,7 @@ const ProductsPage = () => {
                             <option value="Phone">Điện thoại</option>
                             <option value="Laptop">Laptop</option>
                             <option value="Accessory_Watch">Đồng hồ - Phụ kiện</option>
-                            <option value="Household_goods">Vật dụng tại gia</option>
+                            {/* <option value="Household_goods">Vật dụng tại gia</option> */}
                         </select>
                         
                         <label className='font-inter font-bold text-[20px] leading-[32px] text-black' htmlFor="description">Mô tả</label>
@@ -204,7 +204,7 @@ const ProductsPage = () => {
                 </form>
             </div>
             :
-            <div className='flex flex-row justify-between items-center pr-48'>
+            <div className='flex flex-row justify-between items-center pr-30'>
                 <ProductList category={selectedCategory}/>
             </div>
             }  
