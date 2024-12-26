@@ -1,7 +1,8 @@
+import ProductsPage from './pages/ProductsPage'
 function App() {
   return (
-    <div className="text-lg text-center text-red-500">
-      Hello
+    <div>
+      <ProductsPage />
     </div>
   )
 }
