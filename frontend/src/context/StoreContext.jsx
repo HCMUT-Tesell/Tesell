@@ -7,15 +7,25 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
 
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Thêm state loading
 
+  const getProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/product/getAllProduct?page=1&limit=100');
+      const apiProducts = response.data.products;
+      setProducts(apiProducts);
+      setLoading(false) // Giả lập thời gian tải dữ liệu
+    } catch (error) {
+      console.error('Lỗi khi gọi API:', error);
+      setLoading(false); // Dù có lỗi cũng dừng trạng thái loading
+    }
+  };
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/product/getAllProduct?page=1&limit=100')
-      .then(response => response.json())
-      .then(data => setProducts(data.products))
-  }, [])
+    getProducts();
+  }, []);
 
-  // console.log('products: ', products);
+  console.log('products: ', products);
 
 
   const [cartItems, setCartItems] = useState({});
@@ -203,6 +213,7 @@ const StoreContextProvider = (props) => {
 
   const contextValue = {
     products,
+    loading, // Cung cấp loading cho context
     cartItems,
     setCartItems,
     addToCart,
