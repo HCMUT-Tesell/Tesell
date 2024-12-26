@@ -3,7 +3,7 @@ import Banner from "../../components/Banner/banner"
 import Catalog from "../../components/Catalog"
 import Criteria from '../../components/Criteria'
 import ProductList from '../../components/Item/ProductList'
-import ProductFilter from '../../components/testFlowbite'
+import ProductFilter from '../../components/Search/ProductFilter'
 import CurrencyInput from "../../components/Footer/Footer"
 import React, {useState} from 'react'
 const LandingPage = () => {
@@ -24,8 +24,6 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-      {/* <div className='rounded-xl'><ProductFilter></ProductFilter></div> */}
-      {/* <div><CurrencyInput></CurrencyInput></div> */}
     </div>
 
   )
