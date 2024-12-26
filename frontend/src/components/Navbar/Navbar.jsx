@@ -7,6 +7,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
 import ToggleOnRoundedIcon from '@mui/icons-material/ToggleOnRounded';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Cart from '../Cart'
 import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
 import Login from '../Login/Login';
@@ -131,10 +132,10 @@ useEffect(() => {
             <div onClick={()=>setShowLogin(true)} className="button-signin items-center justify-center transition-all" >
                <h > Sign in</h>
             </div> :
-            <div onClick={()=>setShowLogin(true)} className="profile " >
+            <div className="flex profile mr-[36px] items-center justify-center" >
               <div className="loged-indicator">
-                <ToggleOnRoundedIcon/>
-                <p className="log-state">Đã đăng nhập</p>
+                <AccountCircleIcon/>
+                {/* <p className="log-state">Đã đăng nhập</p> */}
                 </div> 
 
           <ul className="pro5-dropdown">
