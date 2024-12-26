@@ -2,33 +2,62 @@ import "./ProductDetail.css";
 import { useParams } from "react-router-dom";
 import { formatCurrency } from "../../components/CartItem";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
-import RemoveCircleRoundedIcon from "@mui/icons-material/RemoveCircleRounded";
+// import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+// import RemoveCircleRoundedIcon from "@mui/icons-material/RemoveCircleRounded";
 import ProductCard from "../../components/Item/ProductCard";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
 // import CartItem from './../../components/CartItem';
 
 const ProductDetail = () => {
-  const { productId } = useParams();
-  const { products, addToCart, removeFromCart, cartItems, ThemVaoGioHang } =
-    useContext(StoreContext);
-  console.log("products", products);
-  const product = products.find((pr) => pr._id === productId);
-  console.log("product", product);
 
-  const [others, setOthers] = useState(
-    products.filter((e) => e._id !== product._id).slice(-6)
-  );
+  const { productId } = useParams();
+  const { products, loading, ThemVaoGioHang } =
+    useContext(StoreContext); {/* addToCart, removeFromCart, cartItems, */}
+  
+  if (loading) {
+    return (
+        <div className="spinner">
+            <div></div>   {/* do not remove*/}
+        </div>
+      );
+  } else console.log("products", products);
+
+  const product = products.find((pr) => pr._id === productId);
+  if (!product) {
+    return <div>Sản phẩm không tồn tại hoặc đang được tải...</div>;
+  }
+  else console.log("product", product);
+
+  // using if only add to cart (not add/remove)
+  let others =  products.sort(() => Math.random() - 0.5).filter((e) => e._id !== product._id).slice(-6)
+  
   const date = new Date();
   date.setDate(date.getDate() + 2);
   const formattedDate = `${String(date.getDate()).padStart(2, "0")}/${String(
     date.getMonth() + 1
   ).padStart(2, "0")}/${date.getFullYear()}`;
 
+  const destination = () => {
+    console.log("destination");
+  }
+
+  const features = [
+    {feature: 'Display', featureDetail: 'Foldable LTPO OLED, 120Hz, HDR10+, 1600 nits'},
+    {feature: 'Software', featureDetail: 'Android 14, upgradable to Android 15'},
+    {feature: 'Main Camera', featureDetail:'48 MP, f/1.7, 25mm | 10.8 MP, f/3.1, 112mm | 10.5 MP, f/2.2, 127'},
+    {feature: 'Battery', featureDetail: '4650 mAh, non-removable | 21W wired | 7.5W wireless'} 
+  ]
+
   return (
     <div className="flex flex-col md:flex-row p-5 gap-5 items-start">
+
+      {/* left side */}
+
       <div className="w-full md:w-1/3 flex flex-col justify-center items-center px-5 py-4 gap-5 bg-white drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-lg">
+        
+        {/* product image */}
+        
         <div className="md:drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
           <img
             className="w-full md:w-[200px] rounded-[10px]"
@@ -59,21 +88,31 @@ const ProductDetail = () => {
             alt=""
           />
         </div>
+
+        {/* product description */}
+
         <div className="w-full">
           <span className="hidden md:flex font-bold text-[20px] leading-[28px] text-[#1C1C28]">
-            Đặc điểm nổi bật{" "}
+            Đặc điểm nổi bật
           </span>
         </div>
-        <ul className="">
-          {" "}
-          {/*list-disc list-inside */}
+        <ul className=""> {/*list-disc list-inside */}
           <li className="hidden md:block pl-2 font-normal text-[16px] leading-[19px] text-black">
             {product.description}
           </li>
         </ul>
       </div>
+
+      {/* right side */}
+
       <div className="flex flex-col w-full gap-5">
+
+        {/* basic info and purchase action */}
+
         <div className="flex flex-col md:flex-row w-full gap-5">
+
+          {/* product name and price */}
+
           <div className="flex flex-col items-start p-[10px_20px] gap-[28px] bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px] md:w-3/4">
             <span className="font-inter font-bold text-[24px] leading-[32px] text-black flex-none order-0 grow-0">
               {product.productName}
@@ -82,6 +121,9 @@ const ProductDetail = () => {
               {formatCurrency(product.sellPrice)}
             </span>
           </div>
+
+          {/* add to cart button */}
+
           <div className="flex flex-wrap justify-center items-center content-center p-2 gap-3 bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px] md:w-1/4">
             <div
               className="h-[60px] overflow-hidden w-[150px] md:w-[200px] md:h-[40px] bg-blue-500 text-white rounded-md flex items-center justify-center cursor-pointer"
@@ -91,6 +133,8 @@ const ProductDetail = () => {
 
               <span className="ml-2 hidden xl:block">Thêm vào giỏ hàng</span>
             </div>
+          </div>
+        </div>
             {/* {cartItems[product._id] ? (
                 <div className='h-[60px] w-auto overflow-hidden md:overflow-visible flex flex-col md:gap-2 items-center justify-center'>
                   <span className='hidden lg:block font-montserrat font-normal text-[14px]  leading-[17px] text-black flex-none order-0 grow-0'>Số lượng:</span>
@@ -111,13 +155,15 @@ const ProductDetail = () => {
                   <span className="ml-2 hidden xl:block">Thêm vào giỏ hàng</span>
                 </div>
               )} */}
-          </div>
-        </div>
+          
+
+        {/* delivery information */} 
+
         <div className="gap-3 flex flex-col justify-center items-center p-4 isolation-isolate  bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px]">
           <span className="flex w-full font-inter font-bold text-[24px] leading-[32px] text-black flex-none order-0 grow-0 z-0">
             Thông tin vận chuyển
           </span>
-          <input
+          <input onChange={destination}
             className="font-inter font-normal text-[20px] leading-[42px] text-black px-3 w-full box-border bg-white border border-black rounded-[5px] flex-none order-1 grow-0 z-0"
             placeholder="Giao đến: 89 Lê Thánh Tôn, Bến Nghé, Quận 1, TP. HCM"
           />
@@ -128,45 +174,31 @@ const ProductDetail = () => {
             Phí vận chuyển (tạm tính): 50.000 đ
           </span>
         </div>
+
+        {/* product information */}
+
         <div className="gap-4 flex flex-col justify-center items-center px-5 py-3 isolation-isolate  bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px]">
           <span className="flex w-full font-inter font-bold text-[24px] leading-[32px] text-black flex-none order-0 grow-0 z-0">
             Thông tin sản phẩm
           </span>
           <div className="w-full flex flex-col">
-            <div className="flex border-t-[1px] border-black p-3">
-              <span className="hidden lg:block w-1/5 font-inter font-normal md:text-[24px] md:leading-[29px] text-center text-black">
-                Display
-              </span>
-              <span className="lg:w-4/5 w-full justify-center items-center flex font-inter font-normal text-[18px]  md:text-[24px] leading-[24px] md:leading-[29px] text-center text-black">
-                Foldable LTPO OLED, 120Hz, HDR10+, 1600 nits
-              </span>
-            </div>
-            <div className="flex border-t-[1px] border-black p-3">
-              <span className="hidden lg:block w-1/5 font-inter font-normal md:text-[24px] md:leading-[29px] text-center text-black">
-                Software
-              </span>
-              <span className="lg:w-4/5 w-full justify-center items-center flex font-inter font-normal text-[18px]  md:text-[24px] leading-[24px] md:leading-[29px] text-center text-black">
-                Android 14, upgradable to Android 15
-              </span>
-            </div>
-            <div className="flex border-t-[1px] border-black p-3">
-              <span className="hidden lg:block w-1/5 font-inter font-normal md:text-[24px] md:leading-[29px] text-center text-black">
-                Main Camera
-              </span>
-              <span className="lg:w-4/5 w-full justify-center items-center flex font-inter font-normal text-[18px]  md:text-[24px] leading-[24px] md:leading-[29px] text-center text-black">
-                48 MP, f/1.7, 25mm | 10.8 MP, f/3.1, 112mm | 10.5 MP, f/2.2, 127
-              </span>
-            </div>
-            <div className="flex border-t-[1px] border-black p-3">
-              <span className="hidden lg:block w-1/5 font-inter font-normal md:text-[24px] md:leading-[29px] text-center text-black">
-                Battery
-              </span>
-              <span className="lg:w-4/5 w-full justify-center items-center flex font-inter font-normal text-[18px]  md:text-[24px] leading-[24px] md:leading-[29px] text-center text-black">
-                4650 mAh, non-removable | 21W wired | 7.5W wireless
-              </span>
-            </div>
+            {features.map((item, index) => {
+                return (
+                  <div key={index} className="flex border-t-[1px] border-black p-3">
+                    <span className="hidden lg:block w-1/5 font-inter font-normal md:text-[24px] md:leading-[29px] text-center text-black">
+                      {item.feature}
+                    </span>
+                    <span className="lg:w-4/5 w-full justify-center items-center flex font-inter font-normal text-[18px]  md:text-[24px] leading-[24px] md:leading-[29px] text-center text-black">
+                      {item.featureDetail}
+                    </span>
+                  </div>
+                )
+              })}
           </div>
         </div>
+
+        {/* other products */}
+
         <div className="gap-4 flex flex-col justify-center items-center px-5 py-3 isolation-isolate  bg-[#E8F3FB] shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-[10px]">
           <span className="pt-8 flex w-full font-inter font-bold text-[24px] leading-[32px] text-black flex-none order-0 grow-0 z-0">
             Sản phẩm khác
@@ -178,6 +210,7 @@ const ProductDetail = () => {
             })}
           </div>
         </div>
+        
       </div>
     </div>
   );

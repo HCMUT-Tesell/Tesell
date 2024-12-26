@@ -30,7 +30,10 @@ const ProductCard = ({
       //Hàm chuyển đến trang chi tiết sản phẩm
   const handleNavigate = () => {
     navigate(`/product/${id}`);
-    window.scrollTo(0, 0);
+    setTimeout(() => window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    }), 100)
     // handleClicked();
   }
 
