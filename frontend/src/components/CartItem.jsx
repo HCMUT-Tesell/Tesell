@@ -14,7 +14,7 @@ const CartItem = (product) => {
     <div className='md:pb-[18px]'>
       <div className='bg-[#E8F3FB] flex min-w-[180px] min-h-12 gap-1 max-w-[180px] md:block md:min-w-[305px] md:min-h-[168px] md:pb-[18px]'>
         <div className='md:flex md:flex-row md:items-center md:justify-between'>
-          <img src={product.image} className='w-12 h-12 md:w-[100px] md:h-[100px]' alt="" />
+          <img src={product.image} className='w-12 h-12 md:w-[100px] md:h-[100px] object-scale-down' alt="" />
           <div className='hidden md:block md:w-[200px] md:truncate'><span className='md:font-bold md:text-[16px] md:text-black'>{product.productName}</span></div>
         </div>
         <div className='flex flex-col gap-0.5 items-center justify-center md:gap-0 md:min-h-[70px] md:flex md:flex-row md:justify-between md:items-center'>
