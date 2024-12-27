@@ -2,17 +2,19 @@ import '../css/ProductsPage.css'
 import Catalog from '../components/Catalog'
 import ProductList from '../components/ProductList';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AddIcon from '@mui/icons-material/Add';
+import { StoreContext } from '../context/StoreContext';
+
 
 const ProductsPage = () => {
+    const { reloadProduct, setReloadProduct } = useContext(StoreContext)
     const [selectedCategory, setSelectedCategory] = useState('bestselling');
     const [addingProduct, setAddingProduct] = useState(false);
     const [editingProduct, setEditingProduct] = useState(false);
     const [file, setFile] = useState(null);
     const [previewVisible, setPreviewVisible] = useState(false);
-
     const [targetProduct, setTargetProduct] = useState(null);
 
     const toggleAddProduct = () => {
@@ -32,14 +34,6 @@ const ProductsPage = () => {
         setPreviewVisible(false);
     }
 
-    
-
-    
-
-    
-
-    
-  
     const handleFileChange = (e) => {
       const selectedFile = e.target.files[0];
       if (selectedFile) {
@@ -103,21 +97,35 @@ const ProductsPage = () => {
         data.image = ''
         checkValidData(data)
         
+        const newProduct = {
+            productName: data.productNameAdd,
+            description: data.descriptionAdd,
+            image: data.image,
+            imageUrl: data.imageUrlAdd,
+            buyPrice: data.buyPriceAdd,
+            sellPrice: data.sellPriceAdd,
+            category: data.categoryAdd,
+            stockProductCount: data.stockProductCountAdd,
+            storedProduct: data.storedProductAdd,
+            rating: data.ratingAdd,
+            numberReviews: data.numberReviewsAdd,
+            isFeature: true,
+            brand: data.brandAdd
+        };
         
         {/* accessToken, authorization */}
         fetch('http://localhost:8000/api/product/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-
-
-
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(newProduct),
         })
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            alert("Thêm sản phẩm thành công");
+            setReloadProduct(!reloadProduct);
         })
         closeAddProduct();
         console.log(addingProduct, editingProduct);
@@ -169,9 +177,8 @@ const ProductsPage = () => {
                 body: JSON.stringify(data),
             })
             closeEditProduct();
-            alert('Sản phẩm đã được cập nhật thành công!')
-            
-    
+            alert('Sản phẩm đã được cập nhật thành công!');
+            setReloadProduct(!reloadProduct);
     }
 
   return (
@@ -388,7 +395,7 @@ const ProductsPage = () => {
      </div> 
             :
             <div className='flex flex-row justify-between items-center pr-30 mb-5'>
-                <ProductList category={selectedCategory} signal={setEditingProduct} target={setTargetProduct}/>
+                <ProductList category={selectedCategory} signal={setEditingProduct} target={setTargetProduct} reload={reloadProduct}/>
             </div>
             }  
         </div>

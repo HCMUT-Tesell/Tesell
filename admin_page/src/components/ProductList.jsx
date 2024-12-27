@@ -20,7 +20,7 @@ const ProductList = (prop) => {
         setError('Không thể tải dữ liệu sản phẩm.');
         setLoading(false);
       });
-  }, [prop.category]); // Gọi lại api mỗi khi category thay đổi
+  }, [prop.category, prop.reload]); // Gọi lại api mỗi khi category thay đổi
 
   if (loading) return <div>Đang tải dữ liệu...</div>;
   if (error) return <div>{error}</div>;

@@ -1,7 +1,13 @@
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import axios from 'axios';
+import { useContext } from 'react';
+import { StoreContext } from '../context/StoreContext';
+
+
 const ProductCard = (prop) => {
+  const { reloadProduct, setReloadProduct } = useContext(StoreContext)
+
   const formatCurrency = (number) => {
     return number.toLocaleString().replaceAll(",", ".");
   } // formatCurrency for admin
@@ -19,6 +25,8 @@ const ProductCard = (prop) => {
       axios.delete(`http://localhost:8000/api/product/${product._id}`)
       .then((response) => {
         console.log('Delete product successfully:', response.data);
+        alert("Xóa sản phẩm thành công");
+        setReloadProduct(!reloadProduct)
       })
     }
     catch (error) {
