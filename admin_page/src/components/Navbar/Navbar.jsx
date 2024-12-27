@@ -9,26 +9,27 @@ import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded
 import ViewListRoundedIcon from '@mui/icons-material/ViewListRounded';
 
 const Navbar = () => {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
+
   return (
     <div className="navbar">
         <div className="navbar-left">
-            <img src={logo_circle} alt="" className="logo"  />
+            <img src={logo_circle} alt="" className="logo hover:cursor-pointer" onClick={() => navigate("/")}  />
         </div>
         <div className="navbar-center">
-            <div className="device">
+            <div className="device hover:cursor-pointer" onClick={() => navigate("/")}>
                 <DevicesOtherRoundedIcon/>
                 <li>Product</li>
             </div>
-            <div className="user">
+            <div className="user hover:cursor-pointer">
                 <PeopleAltRoundedIcon/>
                 <li>User</li>
             </div>
-            <div className="manager">
+            <div className="manager hover:cursor-pointer">
                 <ManageAccountsRoundedIcon/>
                 <li>Mananger</li>
             </div>
-            <div className="orders">
+            <div className="orders hover:cursor-pointer">
                 <ViewListRoundedIcon/>
                 <li>Orders</li>
             </div>
