@@ -7,7 +7,7 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [isAdmin, setIsAdmin] = useState(false);
-
+  const [reloadProduct, setReloadProduct] = useState(false);
   const [notiMsg, setNotiMsg] = useState("");
 
   useEffect(() => {
@@ -69,7 +69,9 @@ const StoreContextProvider = (props) => {
     auth,
     notiMsg,
     setNotiMsg,
-    logOut
+    logOut,
+    reloadProduct, 
+    setReloadProduct
   }
 
   return (
