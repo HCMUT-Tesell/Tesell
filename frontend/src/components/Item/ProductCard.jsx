@@ -24,24 +24,28 @@ const ProductCard = ({
 
   // console.log(id);
   
-  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+  const { cartItems, addToCart, removeFromCart, ThemVaoGioHang } = useContext(StoreContext);
 
   const navigate = useNavigate();
       //Hàm chuyển đến trang chi tiết sản phẩm
   const handleNavigate = () => {
     navigate(`/product/${id}`);
-    window.scrollTo(0, 0);
+    setTimeout(() => window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    }), 100)
     // handleClicked();
   }
 
   const handleClicked = () => {
-    console.log(id)
+    // console.log(id);
+    ThemVaoGioHang(id);
   }
 
   return (
-    <div className="w-[236px] h-[400px] border border-gray-300 rounded-lg p-4 my-5 flex flex-col items-center shadow-sm transform hover:scale-110 hover:cursor-pointer" onClick={handleNavigate}>
+    <div className="w-[236px] h-[400px] border border-gray-300 rounded-lg p-4 my-5 flex flex-col items-center shadow-sm transform hover:scale-110">
       {/* Hình ảnh sản phẩm */}
-      <img src={image ? image : imageUrl} alt={productName} className="w-[200px] h-[200px] object-cover rounded-md"/>
+      <img src={image ? image : imageUrl} alt={productName}  onClick={handleNavigate} className="w-[200px] h-[200px] object-scale-down rounded-md hover:cursor-pointer"/>
       
       {/* Tên sản phẩm */}
       <div className="w-[188px] min-h-[32px] h-fit mt-2 text-center text-sm font-semibold text-gray-800">
@@ -60,11 +64,19 @@ const ProductCard = ({
       </div>
 
       {/* Nút Thêm vào giỏ hàng */}
-      {!cartItems[id] ? (
+      <div
+        onClick={() => ThemVaoGioHang(id)}
+        className="w-[200px] h-[40px] mt-2 bg-blue-500 text-white rounded-md flex items-center justify-center hover:cursor-pointer"
+      >
+        <AddShoppingCartIcon />
+        <span className="ml-2">Thêm vào giỏ hàng</span>
+      </div>
+      
+      {/* {!cartItems[id] ? (
         <div
           onClick={(e) =>{
             e.stopPropagation();
-            addToCart(id)
+            handleClicked(id)
           }
             
           }
@@ -90,7 +102,7 @@ const ProductCard = ({
           </div>
         </div>
       )
-      }
+      } */}
     </div>
   );
 };

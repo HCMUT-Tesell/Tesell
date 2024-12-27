@@ -107,10 +107,11 @@
     cursor: pointer;
     position:absolute;
     display:none;
+    top: 20px;
     right: 0;
     z-index:1;
-
 }
+
 .profile:hover .pro5-dropdown{
     display: flex;
     flex-direction: column;
@@ -121,7 +122,6 @@
     border: #48b3ff solid 2px;
     border-radius: 15px;
     width: max(200px, 15vw);
-
 }
 
 
