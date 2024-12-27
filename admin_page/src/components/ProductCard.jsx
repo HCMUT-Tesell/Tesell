@@ -1,5 +1,6 @@
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import axios from 'axios';
 const ProductCard = (prop) => {
   const formatCurrency = (number) => {
     return number.toLocaleString().replaceAll(",", ".");
@@ -8,9 +9,21 @@ const ProductCard = (prop) => {
   
   const editProduct = () => {
     console.log('Edit product:', product);
+    prop.signal(true)
+    prop.target(product)
   }
   const deleteProduct = () => {
     console.log('Delete product:', product);
+    try {
+      confirm('Are you sure you want to delete this product?')
+      axios.delete(`http://localhost:8000/api/product/${product._id}`)
+      .then((response) => {
+        console.log('Delete product successfully:', response.data);
+      })
+    }
+    catch (error) {
+      console.error('Error when delete product:', error);
+    }
   }
   
   return (
