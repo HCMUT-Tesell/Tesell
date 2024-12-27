@@ -16,10 +16,11 @@
     align-items:center;
     background-color: rgb(255, 255, 255);
     padding: 9px;
-    gap: 100px;
+    gap: 10px;
     box-sizing: border-box;
     justify-content: space-between;
-    border-radius: 40px;
+    border-radius: 20px;
+    width: 500px;
 }
 .button-danh-muc{
     background-color: #93C8ED;

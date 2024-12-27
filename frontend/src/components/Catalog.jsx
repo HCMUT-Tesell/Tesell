@@ -1,9 +1,9 @@
-import { useState } from 'react'
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Catalog = ({ onCategoryChange }) => {
   const [activeTab, setActiveTab] = useState("bestselling");
-
+  const navigate = useNavigate();
   const tabMapping = {
     laptop: "category=Laptop",
     phone: "category=Phone",
@@ -16,6 +16,7 @@ const Catalog = ({ onCategoryChange }) => {
     setActiveTab(tab);
     const mappedValue = tabMapping[tab] || "";
     onCategoryChange(mappedValue); // Gửi danh mục được chọn về ProductList
+    navigate(`/`); // Chuyển hướng đến LandingPage
   };
 
   return (

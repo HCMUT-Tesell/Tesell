@@ -38,7 +38,7 @@ const ProductCard = ({
   }
 
   const handleClicked = () => {
-    // console.log(id);
+    console.log(id);
     ThemVaoGioHang(id);
   }
 
@@ -65,7 +65,7 @@ const ProductCard = ({
 
       {/* Nút Thêm vào giỏ hàng */}
       <div
-        onClick={() => ThemVaoGioHang(id)}
+        onClick={() => handleClicked()}
         className="w-[200px] h-[40px] mt-2 bg-blue-500 text-white rounded-md flex items-center justify-center hover:cursor-pointer"
       >
         <AddShoppingCartIcon />
