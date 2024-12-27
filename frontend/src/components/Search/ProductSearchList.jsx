@@ -78,7 +78,7 @@ const ProductSearchList = ({ searchQuery }) => {
           products.map((item, index) => (
             <ProductCard
               key={index}
-              id={item.id}
+              id={item._id}
               productName={item.productName}
               description={item.description}
               image={item.image}

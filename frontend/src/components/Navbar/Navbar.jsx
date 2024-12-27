@@ -104,11 +104,6 @@ useEffect(() => {
   return (
     <div className='Navbar'>
       <img src={logo_circle} alt="" className="logo hover:cursor-pointer" onClick={() => navigate(`/`)} />
-
-        <div className="button-danh-muc">
-          Danh mục sản phẩm 
-          <MenuOutlinedIcon/>
-        </div>
         
         <div className="search-bar-container">
           <input 
