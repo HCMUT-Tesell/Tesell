@@ -10,6 +10,15 @@ const StoreContextProvider = (props) => {
 
   const [notiMsg, setNotiMsg] = useState("");
 
+  useEffect(() => {
+    const checkAlreadyLogin = () => {
+      const userId = localStorage.getItem('userId');
+      if (userId === '676d642a863b4c90008a8bd3') setIsAdmin(true);
+    }
+
+    checkAlreadyLogin();
+  }, [])
+
   const auth = async (email, password) => {
     if (email === "" || password === "") {
       setNotiMsg("Bạn phải điền đầy đủ thông tin");
