@@ -1,46 +1,55 @@
-import { useState, useEffect } from 'react'
+import Navbar from "./components/navbar/navbar"
 import { Route, Routes } from 'react-router-dom'
-import AuthPage from './AuthPage.jsx';
-import { useContext } from "react";
+import ProductsPage from "./pages/ProductsPage"
+import { useState, useEffect, useContext } from 'react'
+import AuthPage from './pages/AuthPage.jsx';
 import { StoreContext } from "./context/StoreContext.jsx";
 import Toastify from 'toastify-js'
-
 
 function App() {
   const { isAdmin, logOut, notiMsg, setNotiMsg } = useContext(StoreContext);
 
   useEffect(() => {
-          const showNoti = (notiMsg) => {
-              if (notiMsg) {
-                let className = "";
-                if (notiMsg !== "Đăng nhập thành công") className = "bg-red-500 text-white absolute right-10 py-2 px-3 rounded-lg";
-                else className = "bg-green-500 text-white absolute right-10 py-2 px-3 rounded-lg"
-                  Toastify({
-                      className: className,
-                      text: notiMsg,
-                      duration: 3000,
-                      gravity: "top", // `top` or `bottom`
-                      position: "left", // `left`, `center` or `right`
-                      stopOnFocus: true, // Prevents dismissing of toast on hover
-                      onClick: function () { } // Callback after click
-                  }).showToast();
-                  setNotiMsg("");
-              }
-          }
-  
-          showNoti(notiMsg);
-      }, [notiMsg, setNotiMsg])
+    const showNoti = (notiMsg) => {
+      if (notiMsg) {
+        let className = "";
+        if (notiMsg !== "Đăng nhập thành công") className = "bg-red-500 text-white absolute right-10 py-2 px-3 rounded-lg";
+        else className = "bg-green-500 text-white absolute right-10 py-2 px-3 rounded-lg"
+        Toastify({
+          className: className,
+          text: notiMsg,
+          duration: 3000,
+          gravity: "top", // `top` or `bottom`
+          position: "left", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          onClick: function () { } // Callback after click
+        }).showToast();
+        setNotiMsg("");
+      }
+    }
 
-  if (!isAdmin)  {
+    showNoti(notiMsg);
+  }, [notiMsg, setNotiMsg])
+
+  if (!isAdmin) {
     return (
-      <AuthPage/>
+      <AuthPage />
     )
   }
   else {
     return (
-      <div className='h-screen w-screen flex items-center justify-center'>
-        <button className='border rounded-lg px-3 py-2' onClick={() => logOut()}>Log Out</button>
+      // <>
+      <div className='app'>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<ProductsPage />} />
+          <Route path="/product" element={<ProductsPage />} />
+          {/* <Route path="/user" element={<Add url={url}/>}/>
+           <Route path="/manager" element={<List url={url}/>}/>
+           <Route path="/orders" element={<Orders url={url}/>}/> */}
+        </Routes>
       </div>
+      //</>
     )
   }
 }

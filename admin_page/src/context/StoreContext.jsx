@@ -36,7 +36,7 @@ const StoreContextProvider = (props) => {
             localStorage.setItem("userId", userId);
             setIsAdmin(true);
           } else {
-            setNotiMsg("Tài khoảng của bạn không/chưa được cấp quyền quản lý")
+            setNotiMsg("Tài khoản của bạn không/chưa được cấp quyền quản lý")
           }
         } catch (error) {
           console.log("Đã có lỗi xảy ra!")
@@ -51,6 +51,7 @@ const StoreContextProvider = (props) => {
 
   const logOut = () => {
     setIsAdmin(false);
+    setNotiMsg("Bạn đã đăng xuất")
     localStorage.removeItem("userId");
   }
 

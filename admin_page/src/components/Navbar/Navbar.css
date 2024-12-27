@@ -1,0 +1,41 @@
+.navbar{
+    display: flex;
+    padding: 10px 10px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0E6199;
+    margin: 10px;
+    gap: 30px;
+    border-radius: 15px;
+    /* color: white; */
+    height: 75px;
+}
+.logo{
+    width: 50px;
+    margin: 10px;
+}
+.navbar-right{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
+.navbar-center{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.user, .manager, .orders, .device{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+}
+.user li, .manager li, .orders li, .device li{
+    list-style: none;
+    color: white;
+}

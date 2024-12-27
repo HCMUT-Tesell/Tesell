@@ -1,33 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react';
-import { StoreContext } from './context/StoreContext';
-import Toastify from 'toastify-js'
+import { StoreContext } from '../context/StoreContext';
 
 
 function AuthPage() {
-    const { auth, notiMsg, setNotiMsg } = useContext(StoreContext);
+    const { auth } = useContext(StoreContext);
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    // useEffect(() => {
-    //     const showNoti = (notiMsg) => {
-    //         if (notiMsg) {
-    //             Toastify({
-    //                 className: "bg-red-500 text-white absolute right-10 py-2 px-3 rounded-lg",
-    //                 text: notiMsg,
-    //                 duration: 3000,
-    //                 gravity: "top", // `top` or `bottom`
-    //                 position: "left", // `left`, `center` or `right`
-    //                 stopOnFocus: true, // Prevents dismissing of toast on hover
-    //                 onClick: function () { } // Callback after click
-    //             }).showToast();
-    //             setNotiMsg("");
-    //         }
-    //     }
-
-    //     showNoti(notiMsg);
-    // }, [notiMsg, setNotiMsg])
 
     return (
         <div className='h-screen w-screen flex flex-col gap-8 items-center justify-center'>
