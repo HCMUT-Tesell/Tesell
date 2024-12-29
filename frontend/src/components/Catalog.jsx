@@ -16,7 +16,7 @@ const Catalog = ({ onCategoryChange }) => {
     setActiveTab(tab);
     const mappedValue = tabMapping[tab] || "";
     onCategoryChange(mappedValue); // Gửi danh mục được chọn về ProductList
-    navigate(`/`); // Chuyển hướng đến LandingPage
+    navigate(`/payment`); // Chuyển hướng đến LandingPage
   };
 
   return (

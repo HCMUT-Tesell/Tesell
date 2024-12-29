@@ -7,6 +7,7 @@ import OrderDetail from './pages/OrderDetail/OrderDetail'
 import Login from './components/Login/Login'
 import { useState } from 'react'
 import SearchPage from './pages/SearchPage/SearchPage'
+import Payment from './pages/PaymentPage/Payment'
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false)
@@ -22,6 +23,7 @@ const App = () => {
         </Route>
         <Route path='/OrderDetail' element={<OrderDetail/>}/>
         <Route path='/SearchPage' element={<SearchPage/>}/>
+        <Route path='/payment' element={<Payment/>}/>
       </Routes>
     </div>
     </>
