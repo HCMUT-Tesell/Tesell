@@ -46,7 +46,12 @@ class OrderController {
             // Query for search and filter
             const query = {};
             // status filter
-            if (status) query.status = status;
+            if (status) {
+                // console.log(status);
+                if (!Array.isArray(status)) query.status = status;
+                else query.status = {"$in":status}
+            }
+                // query.status = status;
 
             // Sắp xếp
             // Sort
@@ -76,6 +81,7 @@ class OrderController {
                 }
             }
 
+            // console.log(query)
             // Phân trang
             //Pagination
             const orders = await Order.find(query)

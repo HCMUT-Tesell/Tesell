@@ -1,6 +1,7 @@
 import Navbar from "./components/navbar/navbar"
 import { Route, Routes } from 'react-router-dom'
 import ProductsPage from "./pages/ProductsPage"
+import OrdersPage from "./pages/OrdersPage.jsx"
 import { useState, useEffect, useContext } from 'react'
 import AuthPage from './pages/AuthPage.jsx';
 import { StoreContext } from "./context/StoreContext.jsx";
@@ -43,7 +44,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<ProductsPage />} />
-          <Route path="/product" element={<ProductsPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/orders" element={<OrdersPage/>}/>
           {/* <Route path="/user" element={<Add url={url}/>}/>
            <Route path="/manager" element={<List url={url}/>}/>
            <Route path="/orders" element={<Orders url={url}/>}/> */}
