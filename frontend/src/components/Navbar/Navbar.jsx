@@ -47,6 +47,7 @@ const Navbar = ({ setShowLogin }) => {
     setToken(null);
     setShowLogin(false);
     setIsLoggedIn(false);
+    navigate('/');
   }
 
   const copyPhoneToClipboard = () => {

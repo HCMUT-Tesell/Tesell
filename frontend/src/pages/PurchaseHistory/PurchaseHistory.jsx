@@ -1,12 +1,19 @@
 import PurchaseHistoryNavbar from '../../components/PurchaseHistoryNavBar/PurchaseHistoryNavbar'
 import HistoryCard from '../../components/HistoryCard/HistoryCard'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
 const url = "http://localhost:8000";
 
 function PurchaseHistory() {
+    const navigate = useNavigate()
     const userId = localStorage.getItem('ID');
+
+    if (!userId) {
+        navigate("/");
+    }
+
     const [raw_infos, setRaw_infos] = useState([]);
     const [renderableObjs, setRenderableObjs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -78,18 +85,18 @@ function PurchaseHistory() {
                     if (raw_info.status === "selecting") continue;
     
                     const temp = await convertIntoUsefulObject(raw_info);
-                    console.log(temp);
+                    // console.log(temp);
                     result.push(temp);
                 }
                 return result;
             }
 
             const infos = await getRawInfos();
-            console.log("infos", infos);
+            // console.log("infos", infos);
             if (raw_infos.length === 0) setRaw_infos(infos);
 
             const renderObjs = await getRenderableObject();
-            console.log("h23", renderObjs)
+            // console.log("h23", renderObjs)
             setRenderableObjs(renderObjs);
 
             setIsLoading(false);

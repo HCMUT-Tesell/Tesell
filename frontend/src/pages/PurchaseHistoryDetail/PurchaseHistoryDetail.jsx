@@ -56,7 +56,7 @@ const PurchaseHistoryDetail = () => {
 
     useEffect(() => {
         axios.get(`${url}/api/order/${orderId}`).then(response => {
-            console.log("order", response.data.order);
+            // console.log("order", response.data.order);
             setOrder((order) => ({...order, ...response.data.order}));
         })
     }, [orderId])
@@ -65,7 +65,7 @@ const PurchaseHistoryDetail = () => {
         if (!order.user) return;
 
         axios.get(`${url}/api/user/${order.user}`).then(response => {
-            console.log("data", response.data);
+            // console.log("data", response.data);
             setUser((user) => ({...user, ...response.data}));
         })
     }, [order])
@@ -93,8 +93,8 @@ const PurchaseHistoryDetail = () => {
 
         Promise.all(order.orderDetail.map(obj => getProductInfo(obj.product))).then(myProducts => {
             const myQuantities = order.orderDetail.map(obj => obj.quantity);
-            console.log("productId_quantity_list", myProducts);
-            console.log("quantity", myQuantities);
+            // console.log("productId_quantity_list", myProducts);
+            // console.log("quantity", myQuantities);
             const myProductInfo = zip(myProducts, myQuantities)
             setProductInfo(myProductInfo);
             setIsLoading(false);
@@ -198,7 +198,7 @@ const PurchaseHistoryDetail = () => {
                         </div>
                     </div>
                     
-                    <UserInfo firstname={user.firstName} lastname={user.lastName} address={user.address} phone={user.phone} actualShippedDate={order.actualShippedDate} totalPrice={order.totalPrice} />
+                    <UserInfo firstname={user.firstName} lastname={user.lastName} address={order.shippingAddress} phone={user.phone} actualShippedDate={order.actualShippedDate} totalPrice={order.totalPrice} />
                     
                     <div className='w-full mb-2 flex flex-col gap-3'>
                         <div className='flex flex-row gap-2'>
