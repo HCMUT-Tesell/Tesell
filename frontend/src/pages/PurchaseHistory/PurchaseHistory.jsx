@@ -2,12 +2,15 @@ import PurchaseHistoryNavbar from '../../components/PurchaseHistoryNavBar/Purcha
 import HistoryCard from '../../components/HistoryCard/HistoryCard'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import CircularProgress from '@mui/material/CircularProgress';
 const url = "http://localhost:8000";
 
 function PurchaseHistory() {
     const userId = localStorage.getItem('ID');
     const [raw_infos, setRaw_infos] = useState([]);
     const [renderableObjs, setRenderableObjs] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
     
     useEffect(() => {
         const fetchOrders = async () => {
@@ -88,6 +91,8 @@ function PurchaseHistory() {
             const renderObjs = await getRenderableObject();
             console.log("h23", renderObjs)
             setRenderableObjs(renderObjs);
+
+            setIsLoading(false);
         }
 
         fetchOrders();
@@ -102,17 +107,25 @@ function PurchaseHistory() {
         }
     }
 
-    return (
-        <div className='flex flex-col gap-3 items-center'>
-            <PurchaseHistoryNavbar />
-            <div className='flex flex-col gap-3 w-full items-center mb-5'>
-                {renderableObjs.map((renderableObj, index) => {
-                    return (<HistoryCard key={index} dateOrdered={renderableObj.dateOrdered} images={renderableObj.images} orderId={renderableObj.orderId} status={renderableObj.status} totalPrice={renderableObj.totalPrice}/>)
-                })} 
-            </div>
-            <button className='hidden' onClick={debug} >Debug</button>
+
+    if (isLoading) return (
+        <div className='w-full h-screen flex items-center justify-center'>
+            <CircularProgress />
         </div>
     )
+    else {
+        return (
+            <div className='flex flex-col gap-3 items-center'>
+                <PurchaseHistoryNavbar />
+                <div className='flex flex-col gap-3 w-full items-center mb-5'>
+                    {renderableObjs.map((renderableObj, index) => {
+                        return (<HistoryCard key={index} dateOrdered={renderableObj.dateOrdered} images={renderableObj.images} orderId={renderableObj.orderId} status={renderableObj.status} totalPrice={renderableObj.totalPrice}/>)
+                    })} 
+                </div>
+                <button className='hidden' onClick={debug} >Debug</button>
+            </div>
+        )
+    }
 }
 
 export default PurchaseHistory
