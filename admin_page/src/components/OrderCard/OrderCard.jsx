@@ -97,7 +97,7 @@ const OrderCard = ({dateOrdered, status, orderId, totalPrice, images, user, firs
                     })}
                 </div>
                 
-                <div className='relative w-[150px] hover:cursor-pointer' onClick={() => navigate(`/PurchaseHistory/${orderId}`)}>
+                <div className='relative w-[150px] hover:cursor-pointer' onClick={() => navigate(`/orders/${orderId}`)}>
                     <div className='absolute flex flex-row bottom-0 right-0 w-fit'>
                         <p className='text-blue-600 font-semibold'>Xem chi tiết</p>
                         <ArrowRightIcon sx={{ color: "blue" }}/>
