@@ -5,82 +5,100 @@ import axios from 'axios'
 const url = "http://localhost:8000";
 
 function PurchaseHistory() {
-    const tests = [{
-        dateOrdered: "2024-12-24T13:43:59.341+00:00", 
-        status: "delivering", 
-        orderId: "676abd113ef808f1436523f5", 
-        totalPrice: 50000000, 
-        images: [
-            "https://cdn.tgdd.vn/Products/Images/42/327343/xiaomi-poco-m6-black-thumb-600x600.jpg",
-            "https://cdn.tgdd.vn/Products/Images/42/320734/xiaomi-redmi-a3-xanh-l%C3%A1-thumb-600x600.jpg", 
-            "https://cdn.tgdd.vn/Products/Images/42/328626/realme-c65s-blue-thumb-600x600.jpg",
-            "https://cdn.tgdd.vn/Products/Images/7264/293603/q-q-c01a-007py-nu-thumb-fix-600x600.jpg"]
-    },
-    {
-        dateOrdered: "2024-12-24T13:43:59.341+00:00", 
-        status: "delivering", 
-        orderId: "676abd113ef808f1436523f5", 
-        totalPrice: 50000000, 
-        images: [
-            "https://cdn.tgdd.vn/Products/Images/42/327343/xiaomi-poco-m6-black-thumb-600x600.jpg",
-            "https://cdn.tgdd.vn/Products/Images/42/320734/xiaomi-redmi-a3-xanh-l%C3%A1-thumb-600x600.jpg", 
-            "https://cdn.tgdd.vn/Products/Images/42/328626/realme-c65s-blue-thumb-600x600.jpg",
-            "https://cdn.tgdd.vn/Products/Images/7264/293603/q-q-c01a-007py-nu-thumb-fix-600x600.jpg"]
-    },
-    {
-        dateOrdered: "2024-12-24T13:43:59.341+00:00", 
-        status: "delivering", 
-        orderId: "676abd113ef808f1436523f5", 
-        totalPrice: 50000000, 
-        images: [
-            "https://cdn.tgdd.vn/Products/Images/42/327343/xiaomi-poco-m6-black-thumb-600x600.jpg",
-            "https://cdn.tgdd.vn/Products/Images/42/320734/xiaomi-redmi-a3-xanh-l%C3%A1-thumb-600x600.jpg", 
-            "https://cdn.tgdd.vn/Products/Images/42/328626/realme-c65s-blue-thumb-600x600.jpg",
-            "https://cdn.tgdd.vn/Products/Images/7264/293603/q-q-c01a-007py-nu-thumb-fix-600x600.jpg"]
-    }]
-
     const userId = localStorage.getItem('ID');
     const [raw_infos, setRaw_infos] = useState([]);
+    const [renderableObjs, setRenderableObjs] = useState([]);
     
     useEffect(() => {
-        const getRawInfos = async () => {
-            try {
-                const response = await axios.get(`${url}/api/order/user/${userId}/all/`)
-                return response.data.orders;
-            } catch (error) {
-                console.error(error);
-                return undefined;
+        const fetchOrders = async () => {
+            const getRawInfos = async () => {
+                try {
+                    const response = await axios.get(`${url}/api/order/user/${userId}/all/`)
+                    // console.log(response.data.orders);
+                    return response.data.orders;
+                } catch (error) {
+                    console.error(error);
+                    return undefined;
+                }
             }
+    
+            const getCartItemInfo = async (orderDetailId) => {
+                try {
+                    const response = await axios.get(`${url}/api/orderDetail/${orderDetailId}`)
+                    return response.data
+                    // return [response.data.product, response.data.quantity]
+                } catch (error) {
+                    console.error(error);
+                    return undefined
+                }
+            }
+            
+            const getProductInfo = async (productID) => {
+                try {
+                    const response = await axios.get(`${url}/api/product/${productID}`);
+                    // console.log(response.data);
+                    return response.data;
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+
+            const convertIntoUsefulObject = async (orderObject) => {
+                try {
+                    const productId_quantity_list = await Promise.all(orderObject.orderDetail.map(orderDetailId => getCartItemInfo(orderDetailId)));
+                    // console.log(productId_quantity_list);
+                    const products_info = await Promise.all(productId_quantity_list.map(productId_quantity => getProductInfo(productId_quantity.product)));
+                    // const quantities = productId_quantity_list.map(productId_quantity => productId_quantity.quantity);
+                    // console.log(products_info);
+                    // console.log(quantities);
+                    // products = list([<product_id>, <quantity>]);
+                    const orderId = orderObject._id;
+                    const dateOrdered = orderObject.dateOrdered;
+                    const status = orderObject.status;
+                    const images = products_info.map(product_info => product_info.imageUrl);
+                    const totalPrice = orderObject.totalPrice;
+                    return {
+                        dateOrdered: dateOrdered,
+                        status: status,
+                        orderId: orderId,
+                        totalPrice: totalPrice,
+                        images: images
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            
+            const getRenderableObject = async () => {
+                let result = [];
+                for (const raw_info of raw_infos) {
+                    if (raw_info.status === "selecting") continue;
+    
+                    const temp = await convertIntoUsefulObject(raw_info);
+                    console.log(temp);
+                    result.push(temp);
+                }
+                return result;
+            }
+
+            const infos = await getRawInfos();
+            console.log("infos", infos);
+            if (raw_infos.length === 0) setRaw_infos(infos);
+
+            const renderObjs = await getRenderableObject();
+            console.log("h23", renderObjs)
+            setRenderableObjs(renderObjs);
         }
 
-        const getCartItemInfo = async (orderDetailId) => {
-            try {
-                const response = await axios.get(`${url}/api/orderDetail/${orderDetailId}`)
-                return response.data
-                // return [response.data.product, response.data.quantity]
-            } catch (error) {
-                console.error(error);
-                return undefined
-            }
-        }
-
-        const getCartItemsInfo = async (orderDetailIds) => {
-            try {
-                const cartItems = await Promise.all(orderDetailIds.map(id => getCartItemInfo(id)));
-                return cartItems;
-            } catch (error) {
-                console.error('Error fetching cart items info:', error);
-                return [];
-            }
-        };
-
-        getRawInfos()
-        .then(infos => {setRaw_infos(infos)})
-    }, [userId, raw_infos])
+        fetchOrders();
+    }, [raw_infos])
 
     const debug = () => {
         for (const raw_info of raw_infos) {
-            console.log(raw_info);
+            console.log("here", raw_info);
+        }
+        for (const renderableObj of renderableObjs) {
+            console.log(renderableObj);
         }
     }
 
@@ -88,11 +106,11 @@ function PurchaseHistory() {
         <div className='flex flex-col gap-3 items-center'>
             <PurchaseHistoryNavbar />
             <div className='flex flex-col gap-3 w-full items-center mb-5'>
-                {tests.map((test, index) => {
-                    return (<HistoryCard key={index} dateOrdered={test.dateOrdered} images={test.images} orderId={test.orderId} status={test.status} totalPrice={test.totalPrice}/>)
+                {renderableObjs.map((renderableObj, index) => {
+                    return (<HistoryCard key={index} dateOrdered={renderableObj.dateOrdered} images={renderableObj.images} orderId={renderableObj.orderId} status={renderableObj.status} totalPrice={renderableObj.totalPrice}/>)
                 })} 
             </div>
-            <button onClick={debug} >Debug</button>
+            <button className='hidden' onClick={debug} >Debug</button>
         </div>
     )
 }

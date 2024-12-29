@@ -25,7 +25,7 @@ const StoreContextProvider = (props) => {
     getProducts();
   }, []);
 
-  console.log('products: ', products);
+  // console.log('products: ', products);
 
 
   const [cartItems, setCartItems] = useState({});

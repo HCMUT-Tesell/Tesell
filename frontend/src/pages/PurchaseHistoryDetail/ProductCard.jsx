@@ -14,7 +14,7 @@ const ProductCard = ({productName, imageUrl, sellPrice, quantity}) => {
                     <p className='text-gray-500'>{`Đơn giá: ${formatCurrency(sellPrice)}`}</p>
                 </div>
             </div>
-            <div className='flex flex-col'>
+            <div className='flex flex-col items-end'>
                 <p className='text-xl font-bold'>{formatCurrency(sellPrice * quantity)}</p>
                 <p className='text-gray-500'>{`Số lượng: ${quantity}`}</p>
             </div>

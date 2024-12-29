@@ -1,7 +1,3 @@
-import React from 'react'
-
-
-
 const UserInfo = ({ firstname, lastname, address, phone, actualShippedDate, totalPrice }) => {
     const userName = firstname + " " + lastname;
 
@@ -9,22 +5,27 @@ const UserInfo = ({ firstname, lastname, address, phone, actualShippedDate, tota
     let timeShipped = null;
 
     const getYear = (ISO_Date) => {
+        if (!ISO_Date) return ""
         return ISO_Date.substr(0, 4);
     }
     
     const getMonth = (ISO_Date) => {
+        if (!ISO_Date) return ""
         return ISO_Date.substr(5, 2);
     }
     
     const getDay = (ISO_Date) => {
+        if (!ISO_Date) return ""
         return ISO_Date.substr(8, 2);
     }
     
     const getTime = (ISO_Date) => {
+        if (!ISO_Date) return ""
         return ISO_Date.substr(11, 5);
     }
     
     const formatCurrency = (number) => {
+        if (!number) return "";
         return number.toLocaleString().replaceAll(",", ".");
     }
 
