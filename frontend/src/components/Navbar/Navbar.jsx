@@ -47,6 +47,7 @@ const Navbar = ({ setShowLogin }) => {
     setToken(null);
     setShowLogin(false);
     setIsLoggedIn(false);
+    navigate('/');
   }
 
   const copyPhoneToClipboard = () => {
@@ -153,7 +154,8 @@ useEffect(() => {
               </li>
             )}
             <hr />
-
+            <li onClick={() => navigate('/PurchaseHistory')}>Lịch sử mua hàng</li>
+            <hr />
             <li onClick={() => logout()}>Đăng xuất <ArrowOutwardRoundedIcon /> </li>
           </ul>
         </div>

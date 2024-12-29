@@ -166,11 +166,30 @@ class OrderController {
     async getOrderByUserID(req, res) {
         try {
             const userID = req.params.userID;
-            const order = await Order.findOne({user: userID});
+            const order = await Order.findOne({user: userID, status: "selecting"});
+            //
             if (!order) {
-                return res.status(404).json({
-                    message: 'Order not found'
-                })
+                const user = await User.findById(userID);
+
+                const newOrder = new Order({
+                    user: userID,
+                    orderDetail: [],
+                    phone: user.phone,
+                    status: "selecting"
+                }) 
+                
+                try {
+                    const savedOrder = await newOrder.save();
+                    
+                    console.log(savedOrder._id);
+                    return res.status(200).json({
+                        order: savedOrder
+                    })
+
+                } catch (error) {
+                    console.error(error);
+                    return res.status(500).json({ message: 'Error creating order' });
+                }
             }
 
             return res.status(200).json({
@@ -179,6 +198,22 @@ class OrderController {
         } catch (error) {
             console.error(error);
             return res.status(500).json({ message: 'Error fetching order' });
+        }
+    }
+
+    // [GET] api/order/user/:userID/all/
+    async getAllOrderOfUserId(req, res) {
+        try {
+            const userID = req.params.userID;
+            const order = await Order.find({user: userID});
+            // console.log(order);
+            return res.status(200).json({
+                success: true,
+                orders: order
+            })
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ success: false, message: 'Error fetching order' });
         }
     }
 }

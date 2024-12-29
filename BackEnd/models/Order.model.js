@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const Order = new Schema ({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true,
     },
     orderDetail: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -13,15 +14,12 @@ const Order = new Schema ({
     }],
     shippingAddress:{
         type: String,
-        required: true,
     },
     city: {
         type: String,
-        required: true,
     },
     country: {
         type: String,
-        required: true
     },
     phone: {
         type: String,
@@ -32,7 +30,6 @@ const Order = new Schema ({
     },
     totalPrice: {
         type: Number,
-        required: true,
     },
     dateOrdered: {
         type: Date,
@@ -40,6 +37,7 @@ const Order = new Schema ({
     status: {
         type: String,
         // đang chọn, đang chờ thanh toán, đang giao hàng, đã giao hàng
+        // ["selecting", "confirmed", "exported", "delivering", "delivered"]
         required: true,
     },
     predictedShippedDate : {
