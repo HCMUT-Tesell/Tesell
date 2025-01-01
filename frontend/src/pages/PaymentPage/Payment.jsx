@@ -1,21 +1,36 @@
 import InfoShipping from "../../components/Payment/InfoShipping";
-import OrderSummary from "../../components/Payment/Order";
 import OptionPayment from "../../components/Payment/OptionPayment";
 import OptionShipping from "../../components/Payment/OptionShipping";
+import OrderDetail from "../../components/Payment/OrderDetail";
+import { useState, useContext } from 'react';
+import { StoreContext } from "../../context/StoreContext";
+import useFetchProducts from "../../hook/useFetchProducts";
 
 const Payment = () => {
+  const { orderDetailIds, confirmOrder, updateOrderStatus } = useContext(StoreContext);
+  const [shippingFee, setShippingFee] = useState();
+  // const [products, setProducts] = useState([]);
+  const isAuthed = true;
+  const products = useFetchProducts(orderDetailIds, isAuthed);
   return (
-    <div className='flex flex-col'>
-      <div className='p-8 flex w-full flex-row gap-4'>
-        <InfoShipping/>
-        <div className='ml-4 flex flex-col h-full gap-4'>
-          <OptionShipping/>
-          <OptionPayment className='w-[500px]'/>
-        </div>
-        <div className='flex w-full h-full gap-4'>
-          <OrderSummary/>
+    <div className='justify-items-center flex flex-row p-12'>
+      <div className=''>
+        <InfoShipping onSubmit={(shippingData) => {confirmOrder(shippingData);}}/>
+      </div>
+      <div className='px-8 flex-col gap-4 '>
+        <OptionShipping onShippingChange={setShippingFee} />
+        <div className='mt-8'>
+          <OptionPayment/>
         </div>
       </div>
+        <div className=''>
+          {/* <Cart isAuthed={true} orderDetailIds={orderDetailIds} updateOrderFunction={setProducts} /> */}
+          <OrderDetail 
+            products={products} 
+            shippingFee={shippingFee} 
+            onPlaceOrder={(totalPrice) => updateOrderStatus(totalPrice)}
+          />
+        </div>
     </div>
 
   )

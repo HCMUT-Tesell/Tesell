@@ -10,6 +10,7 @@ import SearchPage from './pages/SearchPage/SearchPage'
 import Payment from './pages/PaymentPage/Payment'
 import PurchaseHistory from './pages/PurchaseHistory/PurchaseHistory'
 import PurchaseHistoryDetail from './pages/PurchaseHistoryDetail/PurchaseHistoryDetail'
+import SuccessPayment from './pages/SuccessPayment/SuccessPayment'
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false)
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='/payment' element={<Payment/>}/>
         <Route path='/PurchaseHistory' element={<PurchaseHistory/>}/>
         <Route path="/PurchaseHistory/:orderId" element={<PurchaseHistoryDetail/>}/>
+        <Route path='/success-payment' element={<SuccessPayment/>}/>
       </Routes>
     </div>
     </>

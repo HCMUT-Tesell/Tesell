@@ -1,10 +1,13 @@
 import { useState } from 'react';
 
-const OptionShipping = () => {
+const OptionShipping = ({ onShippingChange }) => {
   const [shippingMethod, setShippingMethod] = useState('store'); // Default: Nhận tại cửa hàng
-
+  const handleChange = (method) => {
+    setShippingMethod(method);
+    onShippingChange(method === "store" ? 0 : 50000);
+  };
   return (
-    <div className="bg-blue-50 w-[390px] p-6 rounded-lg shadow-md shadow-lg shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+    <div className="bg-blue-50 w-[390px] p-6 rounded-lg shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
       {/* Vận chuyển */}
       <div>
         <h2 className="text-lg font-bold mb-4">Vận chuyển</h2>
@@ -15,7 +18,7 @@ const OptionShipping = () => {
               name="shipping"
               value="store"
               checked={shippingMethod === 'store'}
-              onChange={() => setShippingMethod('store')}
+              onChange={() => handleChange("store")}
               className="w-5 h-5 text-blue-600 focus:ring-blue-500 border-gray-300"
             />
             <span>Nhận tại cửa hàng</span>
@@ -24,9 +27,9 @@ const OptionShipping = () => {
             <input
               type="radio"
               name="shipping"
-              value="fast"
-              checked={shippingMethod === 'fast'}
-              onChange={() => setShippingMethod('fast')}
+              value="express"
+              checked={shippingMethod === 'express'}
+              onChange={() => handleChange("express")}
               className="w-5 h-5 text-blue-600 focus:ring-blue-500 border-gray-300"
             />
             <span>Giao hàng nhanh (dự kiến 1-2 ngày) 50.000</span>

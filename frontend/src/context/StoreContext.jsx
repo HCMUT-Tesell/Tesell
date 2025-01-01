@@ -209,6 +209,88 @@ const StoreContextProvider = (props) => {
   //   console.log(cartItems);
   // }, [cartItems]);
 
+
+  //Xác nhận thông tin giao hàng
+  const confirmOrder = async (shippingData) => {
+    const userId = localStorage.getItem("ID"); 
+    if (!userId) {
+      alert("Người dùng cần đăng nhập để xác nhận đơn hàng!");
+      return;
+    }
+  
+    try {
+      // Lấy thông tin đơn hàng của người dùng
+      const orderResponse = await axios.get(`${url}/api/order/user/${userId}`);
+      const order = orderResponse.data.order;
+      // console.log("Order hiện tại:", order);
+      if (!order || order.status !== "selecting") {
+        alert("Không có đơn hàng nào trong trạng thái selecting để xác nhận!");
+        return;
+      }
+  
+      const orderId = order._id;
+  
+      const updateResponse = await axios.put(`${url}/api/order/${orderId}`, {
+      ...order,
+      ...shippingData, // merge thông tin shipping
+    });
+      // console.log("Order sau cập nhật:", updateResponse.data.order);
+  
+      if (updateResponse.data.status) {
+        alert("Cập nhật thông tin giao hàng thành công. Bạn hãy chọn phương thức vận chuyển và thanh toán!");
+        await getUserOrder(); // Cập nhật lại danh sách đơn hàng của người dùng
+      } else {
+        alert("Cập nhật thông tin giao hàng thất bại, vui lòng thử lại!");
+      }
+    } catch (error) {
+      console.error("Lỗi khi cập nhật thông tin giao hàng:", error);
+      alert("Đã xảy ra lỗi khi cập nhật thông tin. Vui lòng thử lại!");
+    }
+    // console.log("Order confirmed!");
+  };
+  
+
+  // Xác nhận đặt hàng: cập nhật totalPrice, status và check xem đã có shippingAddress chưa
+  const updateOrderStatus = async (totalPrice) => {
+    const userId = localStorage.getItem("ID");
+    if (!userId) {
+      alert("Người dùng cần đăng nhập để đặt hàng!");
+      return false;
+    }
+  
+    try {
+      const orderResponse = await axios.get(`${url}/api/order/user/${userId}`);
+      const order = orderResponse.data.order;
+  
+      if (!order || order.status !== "selecting") {
+        alert("Không có đơn hàng nào đang được chọn để đặt hàng!");
+        return false;
+      }
+      if (!order.shippingAddress || order.shippingAddress.trim() === "") {
+        alert("Vui lòng xác nhận thông tin giao hàng trước khi đặt hàng!");
+        return false;
+      }
+      const orderId = order._id;
+      const updateResponse = await axios.put(`${url}/api/order/${orderId}`, {
+        ...order,
+        totalPrice,
+        status: "confirmed",
+      });
+  
+      if (updateResponse.data.status) {
+        alert("Đặt hàng thành công!");
+        await getUserOrder();
+        return true;
+      } else {
+        alert("Đặt hàng thất bại, vui lòng thử lại!");
+        return false;
+      }
+    } catch (error) {
+      console.error("Lỗi khi xác nhận đơn hàng:", error);
+      alert("Đã xảy ra lỗi khi xác nhận đơn hàng. Vui lòng thử lại!");
+      return false;
+    }
+  };
   
 
   const contextValue = {
@@ -224,8 +306,9 @@ const StoreContextProvider = (props) => {
     orderDetailIds,
     ThemVaoGioHang,
     increaseQuantity,
-    decreaseQuantity
-
+    decreaseQuantity,
+    confirmOrder,
+    updateOrderStatus
   }
   return (
     <StoreContext.Provider value={contextValue}>
