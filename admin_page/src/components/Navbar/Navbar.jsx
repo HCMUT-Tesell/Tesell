@@ -21,7 +21,7 @@ const Navbar = () => {
                 <img src={logo_circle} alt="" className="logo hover:cursor-pointer" onClick={() => navigate("/")} />
             </div>
             <div className="navbar-center">
-                <div className="device hover:cursor-pointer" onClick={() => navigate("/product")}>
+                <div className="device hover:cursor-pointer" onClick={() => navigate("/products")}>
                     <DevicesOtherRoundedIcon />
                     <li>Product</li>
                 </div>
@@ -33,7 +33,7 @@ const Navbar = () => {
                     <ManageAccountsRoundedIcon />
                     <li>Mananger</li>
                 </div>
-                <div className="orders hover:cursor-pointer">
+                <div className="orders hover:cursor-pointer" onClick={() => navigate("/orders")}>
                     <ViewListRoundedIcon />
                     <li>Orders</li>
                 </div>
