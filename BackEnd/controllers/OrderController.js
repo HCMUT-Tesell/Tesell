@@ -211,7 +211,7 @@ class OrderController {
     async getAllOrderOfUserId(req, res) {
         try {
             const userID = req.params.userID;
-            const order = await Order.find({user: userID});
+            const order = await Order.find({user: userID}).sort({ dateOrdered: -1 });
             // console.log(order);
             return res.status(200).json({
                 success: true,

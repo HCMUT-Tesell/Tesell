@@ -275,6 +275,7 @@ const StoreContextProvider = (props) => {
         ...order,
         totalPrice,
         status: "confirmed",
+        dateOrdered: Date.now()
       });
   
       if (updateResponse.data.status) {
