@@ -25,14 +25,14 @@ const Navbar = () => {
                     <DevicesOtherRoundedIcon />
                     <li>Product</li>
                 </div>
-                <div className="user hover:cursor-pointer">
+                {/* <div className="user hover:cursor-pointer">
                     <PeopleAltRoundedIcon />
                     <li>User</li>
                 </div>
                 <div className="manager hover:cursor-pointer">
                     <ManageAccountsRoundedIcon />
                     <li>Mananger</li>
-                </div>
+                </div> */}
                 <div className="orders hover:cursor-pointer" onClick={() => navigate("/orders")}>
                     <ViewListRoundedIcon />
                     <li>Orders</li>
