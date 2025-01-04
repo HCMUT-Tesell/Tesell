@@ -1,4 +1,9 @@
 # Tesell
+# Cách chạy hệ thống
+- Lần lượt thực hiện các bước trong file `README.md` ở folder backend
+- Tiếp theo thực hiện các bước trong file `README.md` ở folder frontend
+- Tiếp theo thực hiện các bước trong file `README.md` ở folder admin_page
+
 
 # Git commit: 
 
