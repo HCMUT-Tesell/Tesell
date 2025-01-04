@@ -54,7 +54,7 @@ const OrderDetail = ({ products = [], shippingFee = 0, onPlaceOrder}) => {
         </div>
       </div>
       <div className="flex justify-between mt-4">
-        <button onClick={() => navigate(`/`)} className="text-blue-500 underline">Quay về giỏ hàng</button>
+        <button onClick={() => navigate(`/`)} className="text-blue-500 underline">Quay về trang chủ</button>
         <button onClick={handlePlaceOrder} className="bg-blue-500 text-white py-2 px-4 rounded-md flex items-center gap-2">
           Đặt hàng <span>➡️</span>
         </button>
