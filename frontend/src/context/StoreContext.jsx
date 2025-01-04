@@ -51,6 +51,7 @@ const StoreContextProvider = (props) => {
       try {
         const response = await axios.get(`${url}/api/order/user/${userId}`)
         // console.log("Order Detail", response.data.order);
+        // localStorage.setItem("currentOrderId", response.data.order._id);
         setOrderDetailIds(response.data.order.orderDetail)
       } catch (error) {
         console.error("Lỗi khi lấy giỏ hàng người dùng:", error.message);
@@ -276,7 +277,7 @@ const StoreContextProvider = (props) => {
         ...order,
         totalPrice,
         status: "confirmed",
-        dateOrdered: Date.now()
+        dateOrdered: Date.now() + 25200000
       });
   
       if (updateResponse.data.status) {

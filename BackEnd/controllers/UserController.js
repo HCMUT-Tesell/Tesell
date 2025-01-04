@@ -50,19 +50,19 @@ class UserController {
             const token = createToken(user._id);
             console.log("User created:", email);
 
-            const newOrder = new Order({
-                user: user._id,
-                orderDetail: [],
-                shippingAddress: address,
-                city: "HCM",
-                country: "Vietnam",
-                phone: phone,
-                note: "",
-                totalPrice: 0,
-                status: "selecting"
-            })
+            // const newOrder = new Order({
+            //     user: user._id,
+            //     orderDetail: [],
+            //     shippingAddress: address,
+            //     city: "HCM",
+            //     country: "Vietnam",
+            //     phone: phone,
+            //     note: "",
+            //     totalPrice: 0,
+            //     status: "selecting"
+            // })
 
-            await newOrder.save();
+            // await newOrder.save();
 
             return res.json({success:true,token, _id:user._id});
     
