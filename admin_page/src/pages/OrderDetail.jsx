@@ -139,7 +139,7 @@ function OrderDetail() {
                     </div>
                 </div>
             </div>
-            <button onClick={debug} className='border p-4 disabled:bg-gray-600'>debug</button>
+            <button onClick={debug} className='hidden border p-4 disabled:bg-gray-600'>debug</button>
         </div>
     )
 }

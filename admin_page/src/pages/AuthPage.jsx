@@ -17,7 +17,7 @@ function AuthPage() {
                 <input className='border rounded-lg px-3 py-2' type="password" placeholder='password' required onChange={(e) => {setPassword(e.target.value)}}/>
                 <button className='border border-gray-200 rounded-lg px-3 py-2 text-center bg-blue-200 text-black hover:bg-blue-700 hover:text-white' onClick={() => {auth(email, password)}}>Sign In</button>
             </div>
-            <div className='flex flex-col absolute bottom-1 left-2'>
+            <div className='hidden flex flex-col absolute bottom-1 left-2'>
                 <p className='text-gray-600'>Email admin là: admin@gmail.com</p>
                 <p className='text-gray-600'>Password admin là: admin</p>
             </div>
