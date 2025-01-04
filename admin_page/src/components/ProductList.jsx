@@ -1,7 +1,6 @@
 import { useState, useEffect,  } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard'
-
 const ProductList = (prop) => {
   const [products, setProducts] = useState([]); // Danh sách sản phẩm từ API
   const [loading, setLoading] = useState(true); // Trạng thái tải dữ liệu
@@ -22,11 +21,13 @@ const ProductList = (prop) => {
       });
   }, [prop.category, prop.reload]); // Gọi lại api mỗi khi category thay đổi
 
-  if (loading) return <div>Đang tải dữ liệu...</div>;
+  if (loading) return <div className='fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] '><span>Loading...</span></div>;
+  
+        
   if (error) return <div>{error}</div>;
   
   return (
-    <div className="flex flex-row flex-wrap gap-2">
+    <div className="flex flex-row flex-wrap gap-2 px-2 py-1">
       {products.map((item, index) => {
          return <ProductCard key={index} product={item} signal={prop.signal} target={prop.target}/>
       })}
