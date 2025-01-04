@@ -40,7 +40,7 @@ class OrderController {
     // [GET] api/order/getAllOrder
     async getAllOrder(req, res) {
         try {
-            const { page = 1, limit = 10, sort, userName, status } = req.query;
+            const { page = 1, limit = 100, sort, userName, status } = req.query;
 
             // Tạo query tìm kiếm
             // Query for search and filter
