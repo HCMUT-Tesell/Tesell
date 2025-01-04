@@ -6,6 +6,7 @@ import axios from 'axios';
 
 
 function OrderDetailInfo({order}) {
+    console.log("order", order);
     const getYear = (ISO_Date) => {
         if (!ISO_Date) return "";
         return ISO_Date.substr(0, 4);
@@ -68,10 +69,11 @@ function OrderDetailInfo({order}) {
 
         getUsefulInfo(order.orderDetail).then((result) => {
             setProducts(result);
+            let temp = 0;
             for (let i = 0; i < result.length; i += 1) {
-                const nextPrice = currentTotalPrice + (result[i].quantity * result[i].sellingPrice);
-                setCurrentTotalPrice(nextPrice);
+                temp += (result[i].quantity * result[i].sellingPrice);
             }
+            setCurrentTotalPrice(temp);
         });
     }, [order])
 
