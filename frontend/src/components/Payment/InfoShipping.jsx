@@ -41,7 +41,7 @@ const InfoShipping = ({ onSubmit }) => {
     const shippingData = {
       phone,
       city,
-      shippingAddress: `${street}, ${ward}, ${district}, ${city}`,
+      shippingAddress: `${street}; ${ward}; ${district}; ${city}`,
       note,
     };
     // console.log("Shipping Data:", shippingData);

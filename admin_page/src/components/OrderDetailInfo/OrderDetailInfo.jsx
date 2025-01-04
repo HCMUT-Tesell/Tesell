@@ -28,10 +28,12 @@ function OrderDetailInfo({order}) {
 
     const formatCurrency = (number) => {
         if (!number) return "";
+        if (number === 0) return "0";
         return number.toLocaleString().replaceAll(",", ".");
     }
 
     const [products, setProducts] = useState([]);
+    const [currentTotalPrice, setCurrentTotalPrice] = useState(0);
 
     useEffect(() => {
         const fetchProduct = async (productId) => {
@@ -64,7 +66,13 @@ function OrderDetailInfo({order}) {
             return result;
         }
 
-        getUsefulInfo(order.orderDetail).then((result) => {setProducts(result)});
+        getUsefulInfo(order.orderDetail).then((result) => {
+            setProducts(result);
+            for (let i = 0; i < result.length; i += 1) {
+                const nextPrice = currentTotalPrice + (result[i].quantity * result[i].sellingPrice);
+                setCurrentTotalPrice(nextPrice);
+            }
+        });
     }, [order])
 
     return (
@@ -86,11 +94,11 @@ function OrderDetailInfo({order}) {
 
             <div className='flex flex-row justify-between'>
                 <p>Tổng giá trị</p>
-                <p className='text-lg font-bold text-[#127CC5]'>{formatCurrency(order.totalPrice - 50000)}</p>
+                <p className='text-lg font-bold text-[#127CC5]'>{formatCurrency(currentTotalPrice)}</p>
             </div>
             <div className='flex flex-row justify-between'>
                 <p>Phí vận chuyển, phụ phí</p>
-                <p className='text-lg font-bold text-[#127CC5]'>50.000đ</p>
+                <p className='text-lg font-bold text-[#127CC5]'>{formatCurrency(order.totalPrice - currentTotalPrice)}</p>
             </div>
 
             <Divider></Divider>

@@ -40,7 +40,7 @@ const UserInfo = ({ firstname, lastname, address, phone, actualShippedDate, tota
                 <p className='w-[120px] text-right'>Người nhận</p>
                 <div className='flex flex-col'>
                     <p className='font-semibold'>{`${userName}, ${phone}`}</p>
-                    <p className='font-semibold'>{`${address}`}</p>
+                    <p className='font-semibold'>{`${address.replaceAll(";", ",")}`}</p>
                 </div>
             </div>
 

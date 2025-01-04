@@ -3,10 +3,10 @@ import OrderDetailInfo from '../components/OrderDetailInfo/OrderDetailInfo'
 import UserInfo from '../components/UserInfo/UserInfo'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function OrderDetail() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const url = 'http://localhost:8000'
     const [status, setStatus] = useState("")
 
@@ -139,7 +139,7 @@ function OrderDetail() {
                     </div>
                 </div>
             </div>
-            <button onClick={debug} className='hidden border p-4 disabled:bg-gray-600'>debug</button>
+            <button onClick={debug} className='border p-4 disabled:bg-gray-600'>debug</button>
         </div>
     )
 }

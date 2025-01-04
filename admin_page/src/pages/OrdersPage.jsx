@@ -142,7 +142,7 @@ function OrdersPage() {
               user={order.user}
               firstName={order.firstName}
               lastName={order.lastName}
-              shippingAddress={order.shippingAddress}
+              shippingAddress={order.shippingAddress.replaceAll(";", ",")}
               phone={order.phone}
             />
           )
