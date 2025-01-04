@@ -113,7 +113,7 @@ const Cart = ({isAuthed, orderDetailIds, updateOrderFunction}) => {
             {products.map((product, index) => {
               // console.log('HERE,', product[0]);
               // totalPrice += product.sellPrice * cartItems[product._id];
-              totalPrice += Number(product[0].sellPrice);
+              totalPrice += Number(product[0].sellPrice * product[1]);
               // console.log("total:", totalPrice);
               return (
                 <CartItem key={index} _id={product[0]._id} productName={product[0].productName} sellPrice={product[0].sellPrice} image={product[0].imageUrl} quantity={product[1]}/>

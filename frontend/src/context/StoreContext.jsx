@@ -229,6 +229,7 @@ const StoreContextProvider = (props) => {
       }
   
       const orderId = order._id;
+      localStorage.setItem("currentOrderId", orderId);
   
       const updateResponse = await axios.put(`${url}/api/order/${orderId}`, {
       ...order,
