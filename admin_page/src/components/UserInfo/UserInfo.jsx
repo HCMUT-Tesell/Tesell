@@ -11,10 +11,10 @@ function UserInfo({ email, firstName, lastName, phone, shippingAddress, note }) 
         if (shippingAddress) {
             const addr = shippingAddress.split(";");
             if (addr.length === 4) {
-                setCity(addr[0]);
-                setDistrict(addr[1]);
-                setWard(addr[2]);
-                setStreet(addr[3]);
+                setCity(addr[3]);
+                setDistrict(addr[2]);
+                setWard(addr[1]);
+                setStreet(addr[0]);
             }
         }
     }, [shippingAddress])
