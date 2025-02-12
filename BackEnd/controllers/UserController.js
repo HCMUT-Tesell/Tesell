@@ -1,9 +1,8 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 //import validator from "validator";
 import mongoose from 'mongoose';
 import User from '../models/User.model.js';
-import Order from '../models/Order.model.js'
 
 
 const createToken = (id) => {
@@ -33,7 +32,8 @@ class UserController {
             }
     
             const hashedPassword = await bcrypt.hash(password, 10);
-    
+            
+
             const newUser = new User({
                 email,
                 password: hashedPassword,
