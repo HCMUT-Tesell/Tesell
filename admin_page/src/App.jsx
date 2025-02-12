@@ -1,12 +1,12 @@
-import Navbar from "./components/navbar/navbar"
+import { useContext, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import ProductsPage from "./pages/ProductsPage"
-import OrdersPage from "./pages/OrdersPage.jsx"
-import OrderDetail from "./pages/OrderDetail.jsx"
-import { useState, useEffect, useContext } from 'react'
-import AuthPage from './pages/AuthPage.jsx';
-import { StoreContext } from "./context/StoreContext.jsx";
 import Toastify from 'toastify-js'
+import Navbar from "./components/Navbar/Navbar"
+import { StoreContext } from "./context/StoreContext.jsx"
+import AuthPage from './pages/AuthPage.jsx'
+import OrderDetail from "./pages/OrderDetail.jsx"
+import OrdersPage from "./pages/OrdersPage.jsx"
+import ProductsPage from "./pages/ProductsPage"
 
 function App() {
   const { isAdmin, logOut, notiMsg, setNotiMsg } = useContext(StoreContext);
