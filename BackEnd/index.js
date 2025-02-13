@@ -27,7 +27,7 @@ app.listen(port, () => {
 })
 
 app.get('/', (req, res) => {
-  res.send('Hello world, im testing Jenkins')
+  res.send('Hello world, im testing CI-CD')
 })
 
 
